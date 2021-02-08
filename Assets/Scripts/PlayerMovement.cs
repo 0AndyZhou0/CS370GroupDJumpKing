@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public Rigidbody2D rb;
 
-    public float jumpForce = 10f;
+    public float jumpForce = 20f;
     public Transform feet;
     public LayerMask groundLayers;
 
