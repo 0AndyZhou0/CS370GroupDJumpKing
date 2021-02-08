@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
             moveTime *= sign;
             Jump();
         }
-
         
         /*
         if (Input.GetButtonDown("Jump") && isGrounded()){
