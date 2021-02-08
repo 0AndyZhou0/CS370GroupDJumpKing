@@ -11,16 +11,32 @@ public class PlayerMovement : MonoBehaviour
     public Transform feet;
     public LayerMask groundLayers;
 
+    float startTime;
+    float sign;
     float mx;
 
     // Update is called once per frame
     void Update()
     {
-        mx = Input.GetAxisRaw("Horizontal");
-        
-        if (Input.GetButtonDown("Jump") && isGrounded()){
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            startTime = Time.time;
+            sign = Input.GetAxisRaw("Horizontal");
+        }
+
+        if (Input.GetButtonUp("Horizontal") && isGrounded())
+        {
+            mx = sign * (Time.time - startTime);
             Jump();
         }
+
+        
+        /*
+        if (Input.GetButtonDown("Jump") && isGrounded()){
+            Jump();
+            startTime = 0;
+        }
+        */
     }
 
     void FixedUpdate()
@@ -34,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
         if(mx != 0){
-            Vector2 movement = new Vector2(mx * movementSpeed, jumpForce);
+            Vector2 movement = new Vector2(mx * movementSpeed, Mathf.Abs(mx * jumpForce));
 
             rb.velocity = movement;
         }
