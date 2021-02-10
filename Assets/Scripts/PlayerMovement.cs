@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     float sign;
     float moveTime;
 
+    bool readyToJump = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
                 moveTime = MAX_SPEED;
             }
             moveTime *= sign;
-            Jump();
+            readyToJump = true;
         }
         
         /*
@@ -45,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(readyToJump && rb.velocity.y==0 && rb.velocity.x==0){
+            Jump();
+            readyToJump = false;
+        }
         //Vector2 movement = new Vector2(moveTime * movementSpeed, rb.velocity.y);
 
         //rb.velocity = movement;
