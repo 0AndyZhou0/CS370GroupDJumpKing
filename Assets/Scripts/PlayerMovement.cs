@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
     public Rigidbody2D rb;
-    public float MAX_SPEED = 0.5f;
+    public float MAX_SPEED = 1f;
 
-    public float jumpForce = 20f;
+    public float jumpForce = 10f;
     public Transform feet;
     public LayerMask groundLayers;
 

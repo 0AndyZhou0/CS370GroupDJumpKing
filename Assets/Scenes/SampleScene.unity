@@ -465,10 +465,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37689b0c73b5324d8999a207fb11173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 5
   rb: {fileID: 393031091}
-  MAX_SPEED: 0.5
-  jumpForce: 20
+  MAX_SPEED: 1
+  jumpForce: 10
   feet: {fileID: 167389020}
   groundLayers:
     serializedVersion: 2
