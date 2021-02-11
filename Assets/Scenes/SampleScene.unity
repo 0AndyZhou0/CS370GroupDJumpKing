@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361738757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.601, y: -2.459, z: 0}
+  m_LocalPosition: {x: 7.32, y: 3.85, z: 0}
   m_LocalScale: {x: 4.0387907, y: 1.198905, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -305,8 +305,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386482303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.16, y: -3.9, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalPosition: {x: 0.89, y: -0.97, z: 0}
+  m_LocalScale: {x: 4, y: 1.2706404, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -415,7 +415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393031087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -0.5, z: 0}
+  m_LocalPosition: {x: -1, y: 10.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -438,7 +438,7 @@ MonoBehaviour:
   rb: {fileID: 393031091}
   boxCollider2d: {fileID: 393031092}
   MAX_SPEED: 1
-  jumpForce: 10
+  jumpForce: 20
   groundLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -456,12 +456,12 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &393031092
 BoxCollider2D:
@@ -591,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406890987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.172, y: 9.497, z: 0}
+  m_LocalPosition: {x: 0.26, y: 19.69, z: 0}
   m_LocalScale: {x: 39.544807, y: 1.0459557, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

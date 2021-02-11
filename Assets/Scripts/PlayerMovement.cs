@@ -9,12 +9,12 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D boxCollider2d;
     public float MAX_SPEED = 1f;
 
-    public float jumpForce = 10f;
+    public float jumpForce = 20f;
     public LayerMask groundLayers;
 
     float startTime;
     float direction;
-    float moveTime;
+    float chargeTime;
 
     bool readyToJump = false;
     bool chargingJump = false;
@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded() && !chargingJump)
         {
             direction = Input.GetAxisRaw("Horizontal");
+            if(direction == 0){
+                Vector2 movement = new Vector2(0, rb.velocity.y);
+                rb.velocity = movement;
+            }
         }
 
         if(isStill() && isGrounded())
@@ -37,16 +41,18 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButtonUp("Jump") && chargingJump)
             {
-                moveTime = Time.time - startTime;
-                Debug.Log(moveTime);
-                if(moveTime > MAX_SPEED){
-                    moveTime = MAX_SPEED;
+                chargeTime = Time.time - startTime;
+                //Debug.Log(chargeTime);
+                if(chargeTime > MAX_SPEED){
+                    chargeTime = MAX_SPEED;
                 }
                 direction = Input.GetAxisRaw("Horizontal");
                 chargingJump = false;
                 readyToJump = true;
             }
         }
+
+        Debug.Log(isGrounded());
     }
 
     void FixedUpdate()
@@ -55,16 +61,17 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
-
-        rb.velocity = movement;
+        if(direction != 0){
+            Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
+            rb.velocity = movement;
+        }
     }
 
     void Jump()
     {
         //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-        if(moveTime > 0){
-            Vector2 movement = new Vector2(direction * moveTime * movementSpeed, moveTime * jumpForce);
+        if(chargeTime > 0){
+            Vector2 movement = new Vector2(direction * chargeTime * movementSpeed, chargeTime * jumpForce);
             rb.velocity = movement;
         }
         readyToJump = false;
