@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class movementTest : MonoBehaviour
 {
     public float movementSpeed;
     public Rigidbody2D rb;
@@ -10,39 +10,34 @@ public class PlayerMovement : MonoBehaviour
     public float MAX_SPEED = 1f;
 
     public float jumpForce = 10f;
-    public LayerMask groundLayers;
+    public LayerMask groundLayerMask;
 
     float startTime;
-    float direction;
     float moveTime;
+    float direction;
 
     bool readyToJump = false;
-    bool chargingJump = false;
+    bool ableToWalk = true;
 
     // Update is called once per frame
     void Update()
     {
-        if(isGrounded() && !chargingJump)
-        {
-            direction = Input.GetAxisRaw("Horizontal");
-        }
+        direction = Input.GetAxisRaw("Horizontal");
 
-        if(isStill() && isGrounded())
-        {
+        if(rb.velocity.y==0 && rb.velocity.x==0){
             if (Input.GetButtonDown("Jump"))
             {
-                chargingJump = true;
+                ableToWalk = false;
                 startTime = Time.time;
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetButtonUp("Jump") && isGrounded())
             {
                 moveTime = Time.time - startTime;
                 if(moveTime > MAX_SPEED){
                     moveTime = MAX_SPEED;
                 }
                 direction = Input.GetAxisRaw("Horizontal");
-                chargingJump = false;
                 readyToJump = true;
             }
         }
@@ -50,32 +45,30 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(readyToJump && isStill()){
+        if(readyToJump){
             Jump();
+            readyToJump = false;
+            ableToWalk = true;
         }
 
-        Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
-
-        rb.velocity = movement;
+        //Move Left and Right
+        if(isGrounded() && ableToWalk){
+            Vector2 movement = new Vector2(3 * direction * movementSpeed, rb.velocity.y);
+            rb.velocity = movement;
+        }
     }
 
     void Jump()
     {
         //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
         if(moveTime > 0){
-            Vector2 movement = new Vector2(direction * moveTime * movementSpeed, moveTime * jumpForce);
+            Vector2 movement = new Vector2(moveTime * direction, moveTime * jumpForce);
             rb.velocity = movement;
         }
-        readyToJump = false;
     }
 
-    public bool isGrounded()
+    private bool isGrounded()
     {
-        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers);
-    }
-
-    public bool isStill()
-    {
-        return rb.velocity.y==0 && rb.velocity.x==0;
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f);
     }
 }
