@@ -29,15 +29,16 @@ public class PlayerMovement : MonoBehaviour
 
         if(isStill() && isGrounded())
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !chargingJump)
             {
                 chargingJump = true;
                 startTime = Time.time;
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetButtonUp("Jump") && chargingJump)
             {
                 moveTime = Time.time - startTime;
+                Debug.Log(moveTime);
                 if(moveTime > MAX_SPEED){
                     moveTime = MAX_SPEED;
                 }
