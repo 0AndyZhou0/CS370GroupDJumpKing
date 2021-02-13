@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
         if(chargeTime > 0){
-            Vector2 movement = new Vector2(direction * chargeTime * movementSpeed, chargeTime * jumpForce);
+            Vector2 movement = new Vector2(direction * movementSpeed, chargeTime * jumpForce);
             rb.velocity = movement;
         }
         readyToJump = false;
