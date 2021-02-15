@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider2d;
     public float MAX_SPEED = 1f;
+    public Animator anim;
 
     public float jumpForce = 20f;
     public LayerMask groundLayers;
@@ -51,6 +52,24 @@ public class PlayerMovement : MonoBehaviour
                 readyToJump = true;
             }
         }
+
+        if (Mathf.Abs(direction) > 0.05f)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+        if (direction > 0.05f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        anim.SetBool("isGrounded", isGrounded());
 
         Debug.Log(isGrounded());
     }
