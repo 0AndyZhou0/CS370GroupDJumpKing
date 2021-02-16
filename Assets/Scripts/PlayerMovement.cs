@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isGrounded() && !chargingJump)
+        if(IsGrounded() && !chargingJump)
         {
             direction = Input.GetAxisRaw("Horizontal");
             if(direction == 0){
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(isStill() && isGrounded())
+        if(IsStill() && IsGrounded())
         {
             if (Input.GetButtonDown("Jump") && !chargingJump)
             {
@@ -69,14 +69,14 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        anim.SetBool("isGrounded", isGrounded());
+        anim.SetBool("isGrounded", IsGrounded());
 
-        //Debug.Log(isGrounded());
+        //Debug.Log(IsGrounded());
     }
 
     void FixedUpdate()
     {
-        if(readyToJump && isStill()){
+        if(readyToJump && IsStill()){
             Jump();
         }
 
@@ -88,8 +88,9 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        direction *= -1;
-        Debug.Log(rb.velocity.x);
+        if(!HeadCollision()){
+            direction *= -1;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -107,12 +108,17 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = false;
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers);
     }
 
-    public bool isStill()
+    public bool HeadCollision()
+    {
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.up, 0.01f, groundLayers);
+    }
+
+    public bool IsStill()
     {
         return rb.velocity.y==0 && rb.velocity.x==0;
     }
