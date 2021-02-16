@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         }
         anim.SetBool("isGrounded", isGrounded());
 
-        Debug.Log(isGrounded());
+        //Debug.Log(isGrounded());
     }
 
     void FixedUpdate()
@@ -84,6 +84,17 @@ public class PlayerMovement : MonoBehaviour
             Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
             rb.velocity = movement;
         }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        direction *= -1;
+        Debug.Log(rb.velocity.x);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
     }
 
     void Jump()
