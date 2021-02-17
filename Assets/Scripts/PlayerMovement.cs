@@ -31,26 +31,23 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = movement;
             }
         }
-
-        if(IsStill() && IsGrounded())
+        
+        if (IsStill() && IsGrounded() && Input.GetButtonDown("Jump") && !chargingJump)
         {
-            if (Input.GetButtonDown("Jump") && !chargingJump)
-            {
-                chargingJump = true;
-                startTime = Time.time;
-            }
+            chargingJump = true;
+            startTime = Time.time;
+        }
 
-            if (Input.GetButtonUp("Jump") && chargingJump)
-            {
-                chargeTime = Time.time - startTime;
-                //Debug.Log(chargeTime);
-                if(chargeTime > MAX_SPEED){
-                    chargeTime = MAX_SPEED;
-                }
-                direction = Input.GetAxisRaw("Horizontal");
-                chargingJump = false;
-                readyToJump = true;
+        if (IsGrounded() && Input.GetButtonUp("Jump") && chargingJump)
+        {
+            chargeTime = Time.time - startTime;
+            //Debug.Log(chargeTime);
+            if(chargeTime > MAX_SPEED){
+                chargeTime = MAX_SPEED;
             }
+            direction = Input.GetAxisRaw("Horizontal");
+            chargingJump = false;
+            readyToJump = true;
         }
 
         if (Mathf.Abs(direction) > 0.05f)
@@ -88,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
+                                                    //Temporary Fix
         if(!HeadCollision() && !IsGrounded() && (col.gameObject.name != "Bouncy Platform")){
             direction *= -1;
         }
