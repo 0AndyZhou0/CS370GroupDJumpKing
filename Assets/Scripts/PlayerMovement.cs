@@ -86,16 +86,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if(!HeadCollision() && !IsGrounded()){
+        if(!HeadCollision() && !IsGrounded() && (col.gameObject.name != "Bouncy Platform")){
             direction *= -1;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D col)
     {
-
     }
 
     void Jump()
