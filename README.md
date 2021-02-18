@@ -52,6 +52,8 @@ Cycle 1 -
 
 
 Cycle 2 - Design assets (environment, UI, character, etc), work on early game levels to naturally teach the player but also challenge them a bit 
+
 Cycle 3 - Design and develop mid-game levels that introduce some new mechanics (moving platforms, gravity changes, etc) 
+
 Cycle 4 - Design and develop end-game levels that thoroughly test the player’s skills
 
