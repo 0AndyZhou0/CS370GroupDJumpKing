@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool readyToJump = false;
     bool chargingJump = false;
+    bool notJumping = false;
 
     // Update is called once per frame
     void Update()
@@ -26,10 +27,12 @@ public class PlayerMovement : MonoBehaviour
         if(IsGrounded() && !chargingJump)
         {
             direction = Input.GetAxisRaw("Horizontal");
+            /*
             if(direction == 0){
                 Vector2 movement = new Vector2(0, rb.velocity.y);
                 rb.velocity = movement;
             }
+            */
         }
         
         if (IsStill() && IsGrounded() && Input.GetButtonDown("Jump") && !chargingJump)
@@ -77,17 +80,55 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        if(direction != 0){
+
+        if(IsGrounded() && !chargingJump){
             Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
             rb.velocity = movement;
         }
     }
+
+    bool Approximately(float a, float b, float e){
+        return Mathf.Abs(a - b) < e;
+    } 
     
-    private void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
-                                                    //Temporary Fix
-        if(!HeadCollision() && !IsGrounded() && (col.gameObject.name != "Bouncy Platform")){
-            direction *= -1;
+        Collider2D collider = col.otherCollider;
+        Collider2D collider2 = col.collider;
+        char side = ' ';
+
+        float xMinPoint = collider.bounds.max.x;
+        float xMaxPoint = collider.bounds.min.x; 
+        float yMinPoint = collider.bounds.max.y; 
+        float yMaxPoint = collider.bounds.min.y; 
+        float xMinPoint2 = collider2.bounds.max.x; 
+        float xMaxPoint2 = collider2.bounds.min.x; 
+        float yMinPoint2 = collider2.bounds.max.y; 
+        float yMaxPoint2 = collider2.bounds.min.y; 
+        
+        
+        if (Approximately(xMaxPoint, xMinPoint2, 0.02f))
+            side = 'l';
+        else if (Approximately(xMinPoint, xMaxPoint2, 0.02f))
+            side = 'r';
+        else if (Approximately(yMinPoint, yMaxPoint2, 0.02f))
+            side = 't';
+        else if (Approximately(yMaxPoint, yMinPoint2, 0.02f))
+            side = 'b';
+        //Debug.Log(side);
+        
+        if(side == 'l' || side == 'r'){
+            Vector2 movement = new Vector2(col.relativeVelocity.x, rb.velocity.y);
+            rb.velocity = movement;
+        }
+        else if(side == 't'){
+            Vector2 movement = new Vector2(-1 * col.relativeVelocity.x, col.relativeVelocity.y);
+            rb.velocity = movement;
+        }
+        else if (side == 'b'){
+            Vector2 movement = new Vector2(0, 0);
+            rb.velocity = movement;
+            notJumping = true;
         }
     }
 
@@ -102,12 +143,13 @@ public class PlayerMovement : MonoBehaviour
             Vector2 movement = new Vector2(direction * movementSpeed, chargeTime * jumpForce);
             rb.velocity = movement;
         }
+        notJumping = false;
         readyToJump = false;
     }
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers);
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping && rb.velocity.y==0;
     }
 
     public bool HeadCollision()
