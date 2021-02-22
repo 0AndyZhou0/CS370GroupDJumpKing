@@ -6,65 +6,159 @@ public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
     public Rigidbody2D rb;
-    public float MAX_SPEED = 0.5f;
+    public BoxCollider2D boxCollider2d;
+    public float MAX_SPEED = 1f;
+    public Animator anim;
 
     public float jumpForce = 20f;
-    public Transform feet;
     public LayerMask groundLayers;
 
     float startTime;
-    float sign;
-    float moveTime;
+    float direction;
+    float chargeTime;
+
+    bool readyToJump = false;
+    bool chargingJump = false;
+    bool notJumping = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Horizontal"))
+        if(IsGrounded() && !chargingJump)
         {
-            startTime = Time.time;
-            sign = Input.GetAxisRaw("Horizontal");
-        }
-
-        if (Input.GetButtonUp("Horizontal") && isGrounded())
-        {
-            moveTime = Time.time - startTime;
-            if(moveTime > MAX_SPEED){
-                moveTime = MAX_SPEED;
+            direction = Input.GetAxisRaw("Horizontal");
+            /*
+            if(direction == 0){
+                Vector2 movement = new Vector2(0, rb.velocity.y);
+                rb.velocity = movement;
             }
-            moveTime *= sign;
-            Jump();
+            */
+        }
+        
+        if (IsStill() && IsGrounded() && Input.GetButtonDown("Jump") && !chargingJump)
+        {
+            chargingJump = true;
+            startTime = Time.time;
         }
 
-        
-        /*
-        if (Input.GetButtonDown("Jump") && isGrounded()){
-            Jump();
-            startTime = 0;
+        if (IsGrounded() && Input.GetButtonUp("Jump") && chargingJump)
+        {
+            chargeTime = Time.time - startTime;
+            //Debug.Log(chargeTime);
+            if(chargeTime > MAX_SPEED){
+                chargeTime = MAX_SPEED;
+            }
+            direction = Input.GetAxisRaw("Horizontal");
+            chargingJump = false;
+            readyToJump = true;
         }
-        */
+
+        if (Mathf.Abs(direction) > 0.05f)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+        if (direction > 0.05f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        anim.SetBool("isGrounded", IsGrounded());
+
+        //Debug.Log(IsGrounded());
     }
 
     void FixedUpdate()
     {
-        //Vector2 movement = new Vector2(moveTime * movementSpeed, rb.velocity.y);
+        if(readyToJump && IsStill()){
+            Jump();
+        }
 
-        //rb.velocity = movement;
+
+        if(IsGrounded() && !chargingJump){
+            Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
+            rb.velocity = movement;
+        }
+    }
+
+    bool Approximately(float a, float b, float e){
+        return Mathf.Abs(a - b) < e;
+    } 
+    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Collider2D collider = col.otherCollider;
+        Collider2D collider2 = col.collider;
+        char side = ' ';
+
+        float xMinPoint = collider.bounds.max.x;
+        float xMaxPoint = collider.bounds.min.x; 
+        float yMinPoint = collider.bounds.max.y; 
+        float yMaxPoint = collider.bounds.min.y; 
+        float xMinPoint2 = collider2.bounds.max.x; 
+        float xMaxPoint2 = collider2.bounds.min.x; 
+        float yMinPoint2 = collider2.bounds.max.y; 
+        float yMaxPoint2 = collider2.bounds.min.y; 
+        
+        
+        if (Approximately(xMaxPoint, xMinPoint2, 0.02f))
+            side = 'l';
+        else if (Approximately(xMinPoint, xMaxPoint2, 0.02f))
+            side = 'r';
+        else if (Approximately(yMinPoint, yMaxPoint2, 0.02f))
+            side = 't';
+        else if (Approximately(yMaxPoint, yMinPoint2, 0.02f))
+            side = 'b';
+        //Debug.Log(side);
+        
+        if(side == 'l' || side == 'r'){
+            Vector2 movement = new Vector2(col.relativeVelocity.x, rb.velocity.y);
+            rb.velocity = movement;
+        }
+        else if(side == 't'){
+            Vector2 movement = new Vector2(-1 * col.relativeVelocity.x, col.relativeVelocity.y);
+            rb.velocity = movement;
+        }
+        else if (side == 'b'){
+            Vector2 movement = new Vector2(0, 0);
+            rb.velocity = movement;
+            notJumping = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D col)
+    {
     }
 
     void Jump()
     {
         //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-        if(moveTime != 0){
-            Vector2 movement = new Vector2(moveTime * movementSpeed, Mathf.Abs(moveTime * jumpForce));
-
+        if(chargeTime > 0){
+            Vector2 movement = new Vector2(direction * movementSpeed, chargeTime * jumpForce);
             rb.velocity = movement;
         }
+        notJumping = false;
+        readyToJump = false;
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
-        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping && rb.velocity.y==0;
+    }
 
-        return groundCheck;
+    public bool HeadCollision()
+    {
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.up, 0.02f, groundLayers);
+    }
+
+    public bool IsStill()
+    {
+        return rb.velocity.y==0 && rb.velocity.x==0;
     }
 }
