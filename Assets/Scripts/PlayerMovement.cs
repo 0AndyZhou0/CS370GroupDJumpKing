@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     bool Approximately(float a, float b, float e){
+        //Debug.Log(Mathf.Abs(a - b));
         return Mathf.Abs(a - b) < e;
     } 
     
@@ -116,14 +117,14 @@ public class PlayerMovement : MonoBehaviour
         else if(Approximately(point.x, xMaxPoint, 0.02f)){
             side = 'r';
         }
-        
+        /*
         Debug.Log(xMinPoint);
         Debug.Log(xMaxPoint);
         Debug.Log(yMinPoint);
         Debug.Log(yMaxPoint);
         Debug.Log(point);
         Debug.Log(side);
-        
+        */
         if(side == 'l' || side == 'r'){
             Vector2 movement = new Vector2(col.relativeVelocity.x, rb.velocity.y);
             rb.velocity = movement;
