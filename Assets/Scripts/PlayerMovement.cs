@@ -93,30 +93,37 @@ public class PlayerMovement : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col)
     {
-        Collider2D collider = col.otherCollider;
-        Collider2D collider2 = col.collider;
+        //ContactPoint2D contact = col.GetContact(0);
+        Vector2 point = col.GetContact(0).point;
+
+        Collider2D playerCollider = col.otherCollider;
         char side = ' ';
 
-        float xMinPoint = collider.bounds.max.x;
-        float xMaxPoint = collider.bounds.min.x; 
-        float yMinPoint = collider.bounds.max.y; 
-        float yMaxPoint = collider.bounds.min.y; 
-        float xMinPoint2 = collider2.bounds.max.x; 
-        float xMaxPoint2 = collider2.bounds.min.x; 
-        float yMinPoint2 = collider2.bounds.max.y; 
-        float yMaxPoint2 = collider2.bounds.min.y; 
-        
-        
-        if (Approximately(xMaxPoint, xMinPoint2, 0.02f))
-            side = 'l';
-        else if (Approximately(xMinPoint, xMaxPoint2, 0.02f))
-            side = 'r';
-        else if (Approximately(yMinPoint, yMaxPoint2, 0.02f))
-            side = 't';
-        else if (Approximately(yMaxPoint, yMinPoint2, 0.02f))
+        float xMinPoint = playerCollider.bounds.max.x;
+        float xMaxPoint = playerCollider.bounds.min.x; 
+        float yMinPoint = playerCollider.bounds.max.y; 
+        float yMaxPoint = playerCollider.bounds.min.y; 
+
+        if(Approximately(point.y, yMaxPoint, 0.02f)){
             side = 'b';
-        //Debug.Log(side);
-        
+        }
+        else if(Approximately(point.y, yMinPoint, 0.02f)){
+            side = 't';
+        }
+        else if(Approximately(point.x, xMaxPoint, 0.02f)){
+            side = 'l';
+        }
+        else if(Approximately(point.x, xMinPoint, 0.02f)){
+            side = 'r';
+        }
+        /*
+        Debug.Log(xMinPoint);
+        Debug.Log(xMaxPoint);
+        Debug.Log(yMinPoint);
+        Debug.Log(yMaxPoint);
+        Debug.Log(point);
+        Debug.Log(side);
+        */
         if(side == 'l' || side == 'r'){
             Vector2 movement = new Vector2(col.relativeVelocity.x, rb.velocity.y);
             rb.velocity = movement;
