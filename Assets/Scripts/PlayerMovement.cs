@@ -99,31 +99,31 @@ public class PlayerMovement : MonoBehaviour
         Collider2D playerCollider = col.otherCollider;
         char side = ' ';
 
-        float xMinPoint = playerCollider.bounds.max.x;
-        float xMaxPoint = playerCollider.bounds.min.x; 
-        float yMinPoint = playerCollider.bounds.max.y; 
-        float yMaxPoint = playerCollider.bounds.min.y; 
+        float xMinPoint = playerCollider.bounds.min.x;
+        float xMaxPoint = playerCollider.bounds.max.x; 
+        float yMinPoint = playerCollider.bounds.min.y; 
+        float yMaxPoint = playerCollider.bounds.max.y; 
 
-        if(Approximately(point.y, yMaxPoint, 0.02f)){
+        if(Approximately(point.y, yMinPoint, 0.02f)){
             side = 'b';
         }
-        else if(Approximately(point.y, yMinPoint, 0.02f)){
+        else if(Approximately(point.y, yMaxPoint, 0.02f)){
             side = 't';
         }
-        else if(Approximately(point.x, xMaxPoint, 0.02f)){
+        else if(Approximately(point.x, xMinPoint, 0.02f)){
             side = 'l';
         }
-        else if(Approximately(point.x, xMinPoint, 0.02f)){
+        else if(Approximately(point.x, xMaxPoint, 0.02f)){
             side = 'r';
         }
-        /*
+        
         Debug.Log(xMinPoint);
         Debug.Log(xMaxPoint);
         Debug.Log(yMinPoint);
         Debug.Log(yMaxPoint);
         Debug.Log(point);
         Debug.Log(side);
-        */
+        
         if(side == 'l' || side == 'r'){
             Vector2 movement = new Vector2(col.relativeVelocity.x, rb.velocity.y);
             rb.velocity = movement;
