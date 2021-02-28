@@ -94,21 +94,23 @@ public class PlayerMovement : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col)
     {
-        Vector2 normal = col.GetContact(0).normal;
+        Debug.Log(IsGrounded());
+        if(!IsGrounded()){
+            Vector2 normal = col.GetContact(0).normal;
+            if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)){
+                notJumping = true;
+            }else{
+                Vector2 velocity = col.relativeVelocity;
+                //Debug.Log(normal);
+                //Debug.Log(velocity);
+                Vector2 newVelocity;
+                float dotProduct = velocity.x * normal.x + velocity.y * normal.y;
 
-        if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)){
-            notJumping = true;
-        }else{
-            Vector2 velocity = col.relativeVelocity;
-            Debug.Log(normal);
-            Debug.Log(velocity);
-            Vector2 newVelocity;
-            float dotProduct = velocity.x * normal.x + velocity.y * normal.y;
+                newVelocity.x = 2*(dotProduct)*normal.x - velocity.x;
+                newVelocity.y = 2*(dotProduct)*normal.y - velocity.y;
 
-            newVelocity.x = 2*(dotProduct)*normal.x - velocity.x;
-            newVelocity.y = 2*(dotProduct)*normal.y - velocity.y;
-
-            rb.velocity = newVelocity;
+                rb.velocity = newVelocity;
+            }
         }
     }
 
