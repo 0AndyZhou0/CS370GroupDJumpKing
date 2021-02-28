@@ -96,47 +96,19 @@ public class PlayerMovement : MonoBehaviour
     {
         //ContactPoint2D contact = col.GetContact(0);
         Vector2 point = col.GetContact(0).point;
+        Vector2 normal = col.GetContact(0).normal;
 
-        Collider2D playerCollider = col.otherCollider;
-        char side = ' ';
-
-        float xMinPoint = playerCollider.bounds.min.x;
-        float xMaxPoint = playerCollider.bounds.max.x; 
-        float yMinPoint = playerCollider.bounds.min.y; 
-        float yMaxPoint = playerCollider.bounds.max.y; 
-
-        if(Approximately(point.y, yMinPoint, 0.02f)){
-            side = 'b';
-        }
-        else if(Approximately(point.y, yMaxPoint, 0.02f)){
-            side = 't';
-        }
-        else if(Approximately(point.x, xMinPoint, 0.02f)){
-            side = 'l';
-        }
-        else if(Approximately(point.x, xMaxPoint, 0.02f)){
-            side = 'r';
-        }
-        /*
-        Debug.Log(xMinPoint);
-        Debug.Log(xMaxPoint);
-        Debug.Log(yMinPoint);
-        Debug.Log(yMaxPoint);
-        Debug.Log(point);
-        Debug.Log(side);
-        */
-        if(side == 'l' || side == 'r'){
-            Vector2 movement = new Vector2(col.relativeVelocity.x, rb.velocity.y);
-            rb.velocity = movement;
-        }
-        else if(side == 't'){
-            Vector2 movement = new Vector2(-1 * col.relativeVelocity.x, col.relativeVelocity.y);
-            rb.velocity = movement;
-        }
-        else if (side == 'b'){
-            Vector2 movement = new Vector2(0, 0);
-            rb.velocity = movement;
+        if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)){
             notJumping = true;
+        }else{
+            Vector2 velocity = col.relativeVelocity;
+            Vector2 newVelocity;
+
+            newVelocity.x = 2*(velocity.x * normal.x)*normal.x - velocity.x;
+            newVelocity.y = 2*(velocity.y * normal.y)*normal.y - velocity.y;
+
+            //Debug.Log(newVelocity);
+            rb.velocity = newVelocity;
         }
     }
 
@@ -157,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping && rb.velocity.y==0;
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping;
     }
 
     public bool HeadCollision()
@@ -167,6 +139,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsStill()
     {
-        return rb.velocity.y==0 && rb.velocity.x==0;
+        return Approximately(rb.velocity.x, 0.0f, 0.01f);
     }
 }
