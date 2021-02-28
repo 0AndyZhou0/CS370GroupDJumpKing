@@ -16,13 +16,13 @@ Cycle 1 -
     * [x] Add basic mechanic of bouncing off of walls.  
     * [x] Add moving left and right.  
     * [x] Prevent the player from moving left and right when charging a jump. (BUG: Works unless the user presses both buttons simultaneously)  
-    * [ ] Start working on assets.  
-    * [ ] Environment tileset   
+    * [x] Start working on assets.  
+    * [x] Environment tileset   
     * [ ] UI  
     * [ ] Character  
     * [ ] Finish working on 2 mechanics used in later levels.  
     * [ ] Gravity changes  
-    * [ ] Sloped platforms  
+    * [x] Sloped platforms  
     * [ ] Sticky platforms  
     * [ ] Bouncy platforms  
     * [ ] Moving platforms  
