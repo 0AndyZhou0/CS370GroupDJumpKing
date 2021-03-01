@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(IsGrounded());
+        //Debug.Log(IsGrounded());
         if(!IsGrounded()){
             Vector2 normal = col.GetContact(0).normal;
             if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)){
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D col)
+    void OnCollisionExit2D(Collision2D col)
     {
     }
 
