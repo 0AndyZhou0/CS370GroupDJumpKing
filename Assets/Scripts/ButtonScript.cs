@@ -12,7 +12,17 @@ public class ButtonScript : MonoBehaviour
 
     public void settings()
     {
-
+        //SceneManager.LoadScene("");
     }
-    
+
+    public void characterSelect()
+    {
+        //SceneManager.LoadScene("");
+    }
+
+    public void backToMenu()
+    {
+        SceneManager.LoadScene("TitleScreenBasic");
+    }
+
 }
