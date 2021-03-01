@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour
         Vector3 setPosition = transform.position;
         //Debug.Log(setPosition);
         //Debug.Log(player.transform.position);
-        setPosition.y = player.transform.position.y;
+        setPosition.y = player.transform.position.y + 5;
         transform.position = setPosition;
     }
 }
