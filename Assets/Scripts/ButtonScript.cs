@@ -17,7 +17,7 @@ public class ButtonScript : MonoBehaviour
 
     public void characterSelect()
     {
-        //SceneManager.LoadScene("");
+        SceneManager.LoadScene("CharacterSelectScreen");
     }
 
     public void backToMenu()

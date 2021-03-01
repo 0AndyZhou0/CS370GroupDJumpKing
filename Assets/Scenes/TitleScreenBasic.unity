@@ -1075,7 +1075,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 231596213}
-        m_MethodName: lvlSelect
+        m_MethodName: characterSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
