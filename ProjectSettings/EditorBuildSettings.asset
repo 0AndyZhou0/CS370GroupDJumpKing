@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/tileTest.unity
     guid: 1c6d98afc1be7e94bb422a95c7444dd9
+  - enabled: 1
+    path: Assets/Scenes/SettingsScene.unity
+    guid: 94e550843c761bf4798322e2d5967e98
   m_configObjects: {}
