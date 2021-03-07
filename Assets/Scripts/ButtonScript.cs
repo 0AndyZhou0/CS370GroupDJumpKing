@@ -12,7 +12,7 @@ public class ButtonScript : MonoBehaviour
 
     public void settings()
     {
-        //SceneManager.LoadScene("");
+        SceneManager.LoadScene("SettingsScene");
     }
 
     public void characterSelect()
