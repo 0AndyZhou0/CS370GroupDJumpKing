@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
+
     public void lvlSelect()
     {
-        SceneManager.LoadScene("SmallerRoom");
+        SceneManager.LoadScene("AnotherRoom");
     }
 
     public void settings()
