@@ -7,7 +7,7 @@ public class ButtonScript : MonoBehaviour
 {
     public void lvlSelect()
     {
-        SceneManager.LoadScene("tileTest");
+        SceneManager.LoadScene("SmallerRoom");
     }
 
     public void settings()

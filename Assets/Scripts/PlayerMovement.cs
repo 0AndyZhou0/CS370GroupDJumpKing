@@ -1,18 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed;
+    public float movementSpeed = 2.0f;
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider2d;
     public float MAX_SPEED = 1f;
+    public float GAME_SPEED = 1.7f;
     public Animator anim;
     [SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask groundLayerMask;
 
-    public float jumpForce = 20f;
+    public float jumpForce = 8f;
     public LayerMask groundLayers;
 
     float startTime;
@@ -22,6 +23,11 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump = false;
     bool chargingJump = false;
     bool notJumping = false;
+
+    void Start()
+    {
+        Time.timeScale = GAME_SPEED;
+    }
 
     // Update is called once per frame
     void Update()
@@ -126,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
         if(chargeTime > 0){
-            Vector2 movement = new Vector2(direction * movementSpeed, chargeTime * jumpForce);
+            Vector2 movement = new Vector2(direction * 4.0f, chargeTime * jumpForce);
             rb.velocity = movement;
         }
         notJumping = false;
