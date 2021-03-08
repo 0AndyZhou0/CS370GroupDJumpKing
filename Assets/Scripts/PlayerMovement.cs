@@ -7,8 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 2.0f;
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider2d;
-    public float MIN_SPEED = 0.4f;
-    public float MAX_SPEED = 1.2f;
+    public float MAX_SPEED = 1f;
     public float GAME_SPEED = 1.7f;
     public Animator anim;
     [SerializeField] private Transform groundCheckTransform = null;
@@ -54,10 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             chargeTime = Time.time - startTime;
             //Debug.Log(chargeTime);
-            if(chargeTime < MIN_SPEED){
-                chargeTime = MIN_SPEED;
-            }
-            else if(chargeTime > MAX_SPEED){
+            if(chargeTime > MAX_SPEED){
                 chargeTime = MAX_SPEED;
             }
             direction = Input.GetAxisRaw("Horizontal");
@@ -111,11 +107,11 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(IsGrounded());
         if(!IsGrounded()){
             Vector2 normal = col.GetContact(0).normal;
-            Debug.Log(normal);
             if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)){
                 notJumping = true;
             }else{
                 Vector2 velocity = col.relativeVelocity;
+                //Debug.Log(normal);
                 //Debug.Log(velocity);
                 Vector2 newVelocity;
                 float dotProduct = velocity.x * normal.x + velocity.y * normal.y;
@@ -145,12 +141,18 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        if(Approximately(rb.velocity.y, 0.0f, 0.01f)){
-            notJumping = true;
+
+        //return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping;
+        if (!Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, groundLayerMask))
+        {
+            return false;
         }
-        //Debug.Log(notJumping);
-        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers) && notJumping;
-        //return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers);
+        else
+        {
+            return true;
+        }
+        
+        
     }
 
     public bool HeadCollision()
