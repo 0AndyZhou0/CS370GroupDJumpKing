@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D boxCollider2d;
     public float MAX_SPEED = 1f;
     public Animator anim;
+    [SerializeField] private Transform groundCheckTransform = null;
+    [SerializeField] private LayerMask groundLayerMask;
 
     public float jumpForce = 20f;
     public LayerMask groundLayers;
@@ -76,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+
         if(readyToJump && IsStill()){
             Jump();
         }
@@ -131,7 +135,18 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping;
+
+        //return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping;
+        if (!Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, groundLayerMask))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+        
+        
     }
 
     public bool HeadCollision()
