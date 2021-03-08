@@ -1822,6 +1822,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
         type: 3}
+      propertyPath: MIN_SPEED
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
+        type: 3}
       propertyPath: jumpForce
       value: 9
       objectReference: {fileID: 0}
