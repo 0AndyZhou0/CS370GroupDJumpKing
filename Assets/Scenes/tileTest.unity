@@ -1966,39 +1966,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-=======
-    - target: {fileID: 7272710399062892019, guid: 91ac859213f7a3747801e3759f1bef1d,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272710399062892019, guid: 91ac859213f7a3747801e3759f1bef1d,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272710399062892020, guid: 91ac859213f7a3747801e3759f1bef1d,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 062b244c2df47554f9de624edf6ffec3, type: 2}
-    - target: {fileID: 7272710399062892020, guid: 91ac859213f7a3747801e3759f1bef1d,
-        type: 3}
-      propertyPath: m_SleepingMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
-        type: 3}
-      propertyPath: GAME_SPEED
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 2
-      objectReference: {fileID: 0}
->>>>>>> 0cd45aa0ba1942806914b9e883f35ed6c8c9f2da
     - target: {fileID: 7272710399062892022, guid: 91ac859213f7a3747801e3759f1bef1d,
         type: 3}
       propertyPath: m_RootOrder
