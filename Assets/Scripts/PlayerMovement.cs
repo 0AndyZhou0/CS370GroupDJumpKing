@@ -73,11 +73,11 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
         }
-        if (direction > 0.05f)
+        if (direction > 0.0f)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
-        else
+        else if (direction < 0.0f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
