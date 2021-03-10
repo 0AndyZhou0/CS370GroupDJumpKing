@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 2.0f;
+    float movementSpeed = 2.0f;
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider2d;
-    public float MIN_SPEED = 0.4f;
-    public float MAX_SPEED = 1.2f;
-    public float GAME_SPEED = 1.7f;
+    float MIN_SPEED = 0.4f;
+    float MAX_SPEED = 1.2f;
+    float GAME_SPEED = 1.7f;
     public Animator anim;
     //[SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask groundLayerMask;
@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
     bool chargingJump = false;
     bool notJumping = false;
 
+    public GameObject bar;
+    public GameObject barBackground;
+    float chargeLevel;
+
     void Start()
     {
         Time.timeScale = GAME_SPEED;
@@ -33,6 +37,23 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(chargingJump){
+            barBackground.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
+            chargeLevel = Time.time - startTime;
+            if(chargeLevel > MAX_SPEED - MIN_SPEED){
+                bar.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
+                bar.transform.localPosition = new Vector3(-1.93f, -2.5f, 0.0f);
+            }
+            else if(chargeLevel > 0.0f){
+                chargeLevel /= 0.8f;
+                bar.transform.localScale = new Vector3(0.1f, chargeLevel, 1.0f);
+                bar.transform.localPosition = new Vector3(-1.93f, -3.0f+(chargeLevel/2), 0.0f);
+            }
+        }else{
+            bar.transform.localScale = new Vector3(0.1f, 0.0f, 1.0f);
+            barBackground.transform.localScale = new Vector3(0.1f, 0.0f, 1.0f);
+        }
+
         if(IsGrounded() && !chargingJump)
         {
             direction = Input.GetAxisRaw("Horizontal");
@@ -53,11 +74,8 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded() && Input.GetButtonUp("Jump") && chargingJump)
         {
             chargeTime = Time.time - startTime;
-            //Debug.Log(chargeTime);
-            if(chargeTime < MIN_SPEED){
-                chargeTime = MIN_SPEED;
-            }
-            else if(chargeTime > MAX_SPEED){
+            chargeTime += MIN_SPEED;
+            if(chargeTime > MAX_SPEED){
                 chargeTime = MAX_SPEED;
             }
             direction = Input.GetAxisRaw("Horizontal");
@@ -90,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         
-
         if(readyToJump && IsStill()){
             Jump();
         }
