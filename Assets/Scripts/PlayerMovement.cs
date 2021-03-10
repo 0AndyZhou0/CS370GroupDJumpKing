@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float MAX_SPEED = 1.2f;
     public float GAME_SPEED = 1.7f;
     public Animator anim;
-    [SerializeField] private Transform groundCheckTransform = null;
+    //[SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask groundLayerMask;
 
     public float jumpForce = 8f;
