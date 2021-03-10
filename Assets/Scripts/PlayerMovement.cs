@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         if(IsGrounded() && !chargingJump){
-            Vector2 movement = new Vector2(direction * movementSpeed, rb.velocity.y);
+            Vector2 movement = new Vector2(direction * movementSpeed, 0);
             rb.velocity = movement;
         }
     }
