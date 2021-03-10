@@ -72,3 +72,4 @@ crashlytics-build.properties
 
 # Search index files from MacOS
 .DS_Store
+.vsconfig
