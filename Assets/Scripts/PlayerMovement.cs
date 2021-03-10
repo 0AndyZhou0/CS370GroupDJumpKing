@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("isGrounded", IsGrounded());
 
         //Debug.Log(IsGrounded());
+        //Debug.Log(notJumping);
     }
 
     void FixedUpdate()
@@ -94,6 +95,11 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
+        if(Approximately(rb.velocity.y, 0.0f, 0.01f)){
+            notJumping = true;
+        }else{
+            notJumping = false;
+        }
 
         if(IsGrounded() && !chargingJump){
             Vector2 movement = new Vector2(direction * movementSpeed, 0);
@@ -111,10 +117,15 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(IsGrounded());
         if(!IsGrounded()){
             Vector2 normal = col.GetContact(0).normal;
-            Debug.Log(normal);
+            //Debug.Log(normal);
+
+            //flat ground
             if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)){
                 notJumping = true;
-            }else{
+            }
+            //flat roof
+            else if(Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, -1.0f, 0.01f)){}
+            else{
                 Vector2 velocity = col.relativeVelocity;
                 //Debug.Log(velocity);
                 Vector2 newVelocity;
@@ -145,11 +156,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        if(Approximately(rb.velocity.y, 0.0f, 0.01f)){
-            notJumping = true;
-        }
         //Debug.Log(notJumping);
-        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers) && notJumping;
+        return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.02f, groundLayers) && notJumping;
         //return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers);
     }
 
