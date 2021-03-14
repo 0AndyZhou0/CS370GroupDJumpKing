@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &41298547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5482765296227404939, guid: 91ac859213f7a3747801e3759f1bef1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1446248056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &258115939
 GameObject:
   m_ObjectHideFlags: 0
@@ -6046,6 +6052,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 398bf59ab764a44709e74571f008347b, type: 3}
+--- !u!1 &1096454645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5216414901766080304, guid: 91ac859213f7a3747801e3759f1bef1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1446248056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1332148671 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7272710399062892008, guid: 91ac859213f7a3747801e3759f1bef1d,
@@ -6170,6 +6182,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
         type: 3}
+      propertyPath: bar
+      value: 
+      objectReference: {fileID: 1096454645}
+    - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
+        type: 3}
       propertyPath: MAX_SPEED
       value: 1.2
       objectReference: {fileID: 0}
@@ -6178,6 +6195,11 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
+        type: 3}
+      propertyPath: barBackground
+      value: 
+      objectReference: {fileID: 41298547}
     - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
         type: 3}
       propertyPath: movementSpeed
