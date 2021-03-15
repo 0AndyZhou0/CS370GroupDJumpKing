@@ -7,7 +7,16 @@ public class SmoothCamera : MonoBehaviour
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
 
-    private void FixedUpdate()
+    void Start()
+    {
+        Vector3 setPosition = transform.position;
+        setPosition.x = target.transform.position.x;
+        setPosition.y = target.transform.position.y;
+        transform.position = setPosition;
+    }
+
+
+    void FixedUpdate()
     {
         Vector3 setPosition = transform.position;
         Vector3 desiredPosition = target.position + offset;
