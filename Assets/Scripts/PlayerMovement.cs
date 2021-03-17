@@ -161,16 +161,11 @@ public class PlayerMovement : MonoBehaviour
             }
             //walls
             else if((Approximately(normal.x, 1.0f, 0.01f) || Approximately(normal.x, -1.0f, 0.01f)) && Approximately(normal.y, 0.0f, 0.01f)){
-                Debug.Log("wall");
+                //Debug.Log("wall");
                 Vector2 velocity = col.relativeVelocity;
-                Debug.Log(velocity);
-                Vector2 newVelocity;
+                velocity.y *= -1;
 
-                newVelocity.x = velocity.x;
-                newVelocity.y = -1 * velocity.y;
-                Debug.Log(newVelocity);
-
-                rb.velocity = newVelocity;
+                rb.velocity = velocity;
             }
             /*
             //flat roof
