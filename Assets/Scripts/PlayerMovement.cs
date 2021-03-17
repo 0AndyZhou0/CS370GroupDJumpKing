@@ -117,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector3(-1f, 1f, 1f);
             }
             anim.SetBool("isGrounded", IsGrounded());
+            anim.SetBool("chargingJump", chargingJump);
 
             if (firstThrough) {
                 switch (skinSelect)

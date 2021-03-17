@@ -4,19 +4,22 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -7262991474252624485
-    second: GreyGuy_Idle1
+    second: GreyGuy_animation_idle1
   - first:
       213: 8565580678990432798
-    second: GreyGuy_idle2
+    second: GreyGuy_animation_idle2
   - first:
       213: 4982168208532628684
-    second: GreyGuy_run1
+    second: GreyGuy_animation_run1
   - first:
       213: -4121951872354368674
-    second: GreyGuy_run2
+    second: GreyGuy_animation_run2
   - first:
       213: 4999258497773102473
-    second: GreyGuy_jump
+    second: GreyGuy_animation_jump
+  - first:
+      213: 8961487267012717468
+    second: GreyGuy_animation_crouch
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GreyGuy_Idle1
+      name: GreyGuy_animation_idle1
       rect:
         serializedVersion: 2
         x: 0
@@ -122,7 +125,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -135,7 +138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreyGuy_idle2
+      name: GreyGuy_animation_idle2
       rect:
         serializedVersion: 2
         x: 32
@@ -143,7 +146,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -156,7 +159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreyGuy_run1
+      name: GreyGuy_animation_run1
       rect:
         serializedVersion: 2
         x: 0
@@ -164,7 +167,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -177,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreyGuy_run2
+      name: GreyGuy_animation_run2
       rect:
         serializedVersion: 2
         x: 32
@@ -185,7 +188,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -198,7 +201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreyGuy_jump
+      name: GreyGuy_animation_jump
       rect:
         serializedVersion: 2
         x: 0
@@ -206,7 +209,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -214,6 +217,27 @@ TextureImporter:
       bones: []
       spriteID: 9856e14dd1fe06540800000000000000
       internalID: 4999258497773102473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyGuy_animation_crouch
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9baa7970399d5c70800000000000000
+      internalID: 8961487267012717468
       vertices: []
       indices: 
       edges: []
