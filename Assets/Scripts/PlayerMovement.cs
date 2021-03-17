@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject barBackground;
     float chargeLevel;
 
+    bool paused;
+
     void Start()
     {
         Time.timeScale = GAME_SPEED;
@@ -41,87 +43,99 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (chargingJump) {
-            barBackground.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
-            chargeLevel = Time.time - startTime;
-            if (chargeLevel > MAX_SPEED - MIN_SPEED) {
-                bar.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
-                bar.transform.localPosition = new Vector3(-1.93f, -2.5f, 0.0f);
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if(paused){
+                Time.timeScale = GAME_SPEED;
+            }else{
+                Time.timeScale = 0.0f;
             }
-            else if (chargeLevel > 0.0f) {
-                chargeLevel /= 0.8f;
-                bar.transform.localScale = new Vector3(0.1f, chargeLevel, 1.0f);
-                bar.transform.localPosition = new Vector3(-1.93f, -3.0f + (chargeLevel / 2), 0.0f);
+            paused = !paused;
+        }
+
+        if(!paused){
+
+            if (chargingJump) {
+                barBackground.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
+                chargeLevel = Time.time - startTime;
+                if (chargeLevel > MAX_SPEED - MIN_SPEED) {
+                    bar.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
+                    bar.transform.localPosition = new Vector3(-1.93f, -2.5f, 0.0f);
+                }
+                else if (chargeLevel > 0.0f) {
+                    chargeLevel /= 0.8f;
+                    bar.transform.localScale = new Vector3(0.1f, chargeLevel, 1.0f);
+                    bar.transform.localPosition = new Vector3(-1.93f, -3.0f + (chargeLevel / 2), 0.0f);
+                }
+            } else {
+                bar.transform.localScale = new Vector3(0.1f, 0.0f, 1.0f);
+                barBackground.transform.localScale = new Vector3(0.1f, 0.0f, 1.0f);
             }
-        } else {
-            bar.transform.localScale = new Vector3(0.1f, 0.0f, 1.0f);
-            barBackground.transform.localScale = new Vector3(0.1f, 0.0f, 1.0f);
-        }
 
-        if (IsGrounded() && !chargingJump)
-        {
-            direction = Input.GetAxisRaw("Horizontal");
-            /*
-            if(direction == 0){
-                Vector2 movement = new Vector2(0, rb.velocity.y);
-                rb.velocity = movement;
-            }
-            */
-        }
-
-        if (IsStill() && IsGrounded() && Input.GetButtonDown("Jump") && !chargingJump)
-        {
-            chargingJump = true;
-            startTime = Time.time;
-        }
-
-        if (IsGrounded() && Input.GetButtonUp("Jump") && chargingJump)
-        {
-            chargeTime = Time.time - startTime;
-            chargeTime += MIN_SPEED;
-            if (chargeTime > MAX_SPEED) {
-                chargeTime = MAX_SPEED;
-            }
-            direction = Input.GetAxisRaw("Horizontal");
-            chargingJump = false;
-            readyToJump = true;
-        }
-
-        if (Mathf.Abs(direction) > 0.05f)
-        {
-            anim.SetBool("isRunning", true);
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-        }
-        if (direction > 0.0f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if (direction < 0.0f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-        anim.SetBool("isGrounded", IsGrounded());
-
-        if (firstThrough) {
-            switch (skinSelect)
+            if (IsGrounded() && !chargingJump)
             {
-                case 0:
-                    anim.SetBool("GreyGuySelect", true);
-                    anim.SetBool("GhostSelect", false);
-                    break;
-                case 1:
-                    anim.SetBool("GreyGuySelect", false);
-                    anim.SetBool("GhostSelect", true);
-                    break;
+                direction = Input.GetAxisRaw("Horizontal");
+                /*
+                if(direction == 0){
+                    Vector2 movement = new Vector2(0, rb.velocity.y);
+                    rb.velocity = movement;
+                }
+                */
             }
-            firstThrough = false;
-        }
 
-        //Debug.Log(IsGrounded());
-        //Debug.Log(notJumping);
+            if (IsStill() && IsGrounded() && Input.GetButtonDown("Jump") && !chargingJump)
+            {
+                chargingJump = true;
+                startTime = Time.time;
+            }
+
+            if (IsGrounded() && Input.GetButtonUp("Jump") && chargingJump)
+            {
+                chargeTime = Time.time - startTime;
+                chargeTime += MIN_SPEED;
+                if (chargeTime > MAX_SPEED) {
+                    chargeTime = MAX_SPEED;
+                }
+                direction = Input.GetAxisRaw("Horizontal");
+                chargingJump = false;
+                readyToJump = true;
+            }
+
+            if (Mathf.Abs(direction) > 0.05f)
+            {
+                anim.SetBool("isRunning", true);
+            }
+            else
+            {
+                anim.SetBool("isRunning", false);
+            }
+            if (direction > 0.0f)
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+            else if (direction < 0.0f)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+            anim.SetBool("isGrounded", IsGrounded());
+
+            if (firstThrough) {
+                switch (skinSelect)
+                {
+                    case 0:
+                        anim.SetBool("GreyGuySelect", true);
+                        anim.SetBool("GhostSelect", false);
+                        break;
+                    case 1:
+                        anim.SetBool("GreyGuySelect", false);
+                        anim.SetBool("GhostSelect", true);
+                        break;
+                }
+                firstThrough = false;
+            }
+
+            //Debug.Log(IsGrounded());
+            //Debug.Log(notJumping);
+        }
     }
 
     void FixedUpdate()
@@ -185,9 +199,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D col)
-    {
-    }
+    //void OnCollisionExit2D(Collision2D col){}
 
     void Jump()
     {
@@ -207,10 +219,12 @@ public class PlayerMovement : MonoBehaviour
         //return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.01f, groundLayers);
     }
 
+    /*
     public bool HeadCollision()
     {
         return Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.up, 0.02f, groundLayers);
     }
+    */
 
     public bool IsStill()
     {
