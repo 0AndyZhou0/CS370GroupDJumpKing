@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask groundLayerMask;
 
-    public float jumpForce = 8f;
+    public float jumpForce = 9f;
     public LayerMask groundLayers;
 
     float startTime;
@@ -153,12 +153,26 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(IsGrounded());
         if (!IsGrounded()) {
             Vector2 normal = col.GetContact(0).normal;
-            //Debug.Log(normal);
+            Debug.Log(normal);
 
             //flat ground
             if (Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)) {
                 notJumping = true;
             }
+            //walls
+            else if((Approximately(normal.x, 1.0f, 0.01f) || Approximately(normal.x, -1.0f, 0.01f)) && Approximately(normal.y, 0.0f, 0.01f)){
+                Debug.Log("wall");
+                Vector2 velocity = col.relativeVelocity;
+                Debug.Log(velocity);
+                Vector2 newVelocity;
+
+                newVelocity.x = velocity.x;
+                newVelocity.y = -1 * velocity.y;
+                Debug.Log(newVelocity);
+
+                rb.velocity = newVelocity;
+            }
+            /*
             //flat roof
             else if (Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, -1.0f, 0.01f)) { }
             else {
@@ -172,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
                 rb.velocity = newVelocity;
             }
+            */
         }
     }
 

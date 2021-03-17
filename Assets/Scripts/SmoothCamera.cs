@@ -10,7 +10,8 @@ public class SmoothCamera : MonoBehaviour
     void Start()
     {
         Vector3 setPosition = transform.position;
-        setPosition.x = target.transform.position.x;
+        //setPosition.x = target.transform.position.x;
+        setPosition.x = 0;
         setPosition.y = target.transform.position.y;
         transform.position = setPosition;
     }
