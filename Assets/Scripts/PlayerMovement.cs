@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     float GAME_SPEED = 1.7f;
 
     public Animator anim;
-    int skinSelect = 0;
+    public static int skinSelect = 0;
     bool firstThrough = true;
 
     //[SerializeField] private Transform groundCheckTransform = null;
