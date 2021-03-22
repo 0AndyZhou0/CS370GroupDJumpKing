@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SmallerRoom.unity
     guid: 3741317ec92ec7e4da62e20a3679e3a5
+  - enabled: 1
+    path: Assets/Scenes/WholeGame.unity
+    guid: 1dd86870124376249acfb648e52ec1a9
   m_configObjects: {}
