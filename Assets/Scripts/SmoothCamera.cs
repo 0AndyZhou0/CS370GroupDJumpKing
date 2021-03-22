@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class SmoothCamera : MonoBehaviour
 {
@@ -15,7 +15,6 @@ public class SmoothCamera : MonoBehaviour
         setPosition.y = target.transform.position.y;
         transform.position = setPosition;
     }
-
 
     void FixedUpdate()
     {
