@@ -320,6 +320,8 @@ MonoBehaviour:
     m_Bits: 256
   bar: {fileID: 0}
   barBackground: {fileID: 0}
+  pauseMenuUI: {fileID: 0}
+  settingsMenuUI: {fileID: 0}
 --- !u!95 &7272710399062892018
 Animator:
   serializedVersion: 3
