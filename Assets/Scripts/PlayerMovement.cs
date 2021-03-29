@@ -46,9 +46,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("GreyGuySelect:" + anim.GetBool("GreyGuySelect"));
-        Debug.Log("GhostSelect:" + anim.GetBool("GhostSelect"));
-
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(paused){
                 Resume();
@@ -204,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(IsGrounded());
         if (!IsGrounded()) {
             Vector2 normal = col.GetContact(0).normal;
-            Debug.Log(normal);
+            //Debug.Log(normal);
 
             //flat ground
             if (Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)) {
@@ -296,11 +293,9 @@ public class PlayerMovement : MonoBehaviour
         anim.Rebind();
         //anim.Update(0f);
         if(PlayerPrefs.GetInt("skin") == 1){
-            //Debug.Log("Grey Guy Selected");
             PlayerPrefs.SetInt("skin", 0);
             SkinSelect(0);
         }else{
-            //Debug.Log("Ghost Selected");
             PlayerPrefs.SetInt("skin", 1);
             SkinSelect(1);
         }
@@ -308,12 +303,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void ToggleCheat(){
         if(cheatsActive){
-            //Debug.Log("Cheats Disabled");
             bar.SetActive(false);
             barBackground.SetActive(false);
             cheatsActive = false;
         }else{
-            //Debug.Log("Cheats Enabled");
             bar.SetActive(true);
             barBackground.SetActive(true);
             cheatsActive = true;
