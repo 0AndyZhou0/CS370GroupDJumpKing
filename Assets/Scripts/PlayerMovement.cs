@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     float GAME_SPEED = 1.7f;
 
     public Animator anim;
-    static int skinSelect = 0;
 
     //[SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask groundLayerMask;
@@ -41,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         Time.timeScale = GAME_SPEED;
-        SkinSelect();
+        SkinSelect(PlayerPrefs.GetInt("skin"));
     }
 
     // Update is called once per frame
@@ -291,12 +290,15 @@ public class PlayerMovement : MonoBehaviour
 
     //Settings
     public void ChangeSkin(){
-        if(skinSelect == 1){
-            skinSelect = 0;
+        if(PlayerPrefs.GetInt("skin") == 1){
+            Debug.Log("Grey Guy Selected");
+            PlayerPrefs.SetInt("skin", 0);
+            SkinSelect(0);
         }else{
-            skinSelect = 1;
+            Debug.Log("Ghost Selected");
+            PlayerPrefs.SetInt("skin", 1);
+            SkinSelect(1);
         }
-        SkinSelect();
     }
 
     public void ToggleCheat(){
@@ -319,18 +321,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     //Skins
-
-    public void GreyGuySelected()
-    {
-        skinSelect = 0;
-    }
-
-    public void GhostSelected()
-    {
-        skinSelect = 1;
-    }
-
-    void SkinSelect(){
+    void SkinSelect(int skinSelect){
         switch (skinSelect)
         {
             case 0:

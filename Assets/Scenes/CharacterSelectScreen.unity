@@ -843,21 +843,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 609118931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d37689b0c73b5324d8999a207fb11173, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a5eb27286a854a4a83a30ec0c36496d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  boxCollider2d: {fileID: 0}
-  anim: {fileID: 0}
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpForce: 8
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  bar: {fileID: 0}
-  barBackground: {fileID: 0}
 --- !u!1 &709225485
 GameObject:
   m_ObjectHideFlags: 0
