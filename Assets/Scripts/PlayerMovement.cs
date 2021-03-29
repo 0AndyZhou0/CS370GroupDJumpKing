@@ -296,11 +296,11 @@ public class PlayerMovement : MonoBehaviour
         anim.Rebind();
         //anim.Update(0f);
         if(PlayerPrefs.GetInt("skin") == 1){
-            Debug.Log("Grey Guy Selected");
+            //Debug.Log("Grey Guy Selected");
             PlayerPrefs.SetInt("skin", 0);
             SkinSelect(0);
         }else{
-            Debug.Log("Ghost Selected");
+            //Debug.Log("Ghost Selected");
             PlayerPrefs.SetInt("skin", 1);
             SkinSelect(1);
         }
@@ -308,12 +308,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void ToggleCheat(){
         if(cheatsActive){
-            Debug.Log("Cheats Disabled");
+            //Debug.Log("Cheats Disabled");
             bar.SetActive(false);
             barBackground.SetActive(false);
             cheatsActive = false;
         }else{
-            Debug.Log("Cheats Enabled");
+            //Debug.Log("Cheats Enabled");
             bar.SetActive(true);
             barBackground.SetActive(true);
             cheatsActive = true;
