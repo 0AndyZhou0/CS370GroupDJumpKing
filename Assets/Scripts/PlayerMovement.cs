@@ -46,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("GreyGuySelect:" + anim.GetBool("GreyGuySelect"));
+        Debug.Log("GhostSelect:" + anim.GetBool("GhostSelect"));
+
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(paused){
                 Resume();
@@ -290,6 +293,8 @@ public class PlayerMovement : MonoBehaviour
 
     //Settings
     public void ChangeSkin(){
+        anim.Rebind();
+        //anim.Update(0f);
         if(PlayerPrefs.GetInt("skin") == 1){
             Debug.Log("Grey Guy Selected");
             PlayerPrefs.SetInt("skin", 0);
