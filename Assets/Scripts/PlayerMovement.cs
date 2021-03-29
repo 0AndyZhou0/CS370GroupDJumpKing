@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,8 +13,7 @@ public class PlayerMovement : MonoBehaviour
     float GAME_SPEED = 1.7f;
 
     public Animator anim;
-    public static int skinSelect = 0;
-    bool firstThrough = true;
+    static int skinSelect = 0;
 
     //[SerializeField] private Transform groundCheckTransform = null;
     [SerializeField] private LayerMask groundLayerMask;
@@ -29,15 +29,19 @@ public class PlayerMovement : MonoBehaviour
     bool chargingJump = false;
     bool notJumping = false;
 
+    bool cheatsActive = false;
     public GameObject bar;
     public GameObject barBackground;
     float chargeLevel;
 
     bool paused;
+    public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
 
     void Start()
     {
         Time.timeScale = GAME_SPEED;
+        SkinSelect();
     }
 
     // Update is called once per frame
@@ -45,14 +49,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(paused){
-                Time.timeScale = GAME_SPEED;
+                Resume();
             }else{
-                Time.timeScale = 0.0f;
+                Pause();
             }
-            paused = !paused;
         }
 
         if(!paused){
+
+            //Movement
 
             if (chargingJump) {
                 barBackground.transform.localScale = new Vector3(0.1f, 1.0f, 1.0f);
@@ -100,6 +105,12 @@ public class PlayerMovement : MonoBehaviour
                 readyToJump = true;
             }
 
+
+
+
+
+            //Animation
+
             if (Mathf.Abs(direction) > 0.05f)
             {
                 anim.SetBool("isRunning", true);
@@ -119,20 +130,6 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isGrounded", IsGrounded());
             anim.SetBool("chargingJump", chargingJump);
 
-            if (firstThrough) {
-                switch (skinSelect)
-                {
-                    case 0:
-                        anim.SetBool("GreyGuySelect", true);
-                        anim.SetBool("GhostSelect", false);
-                        break;
-                    case 1:
-                        anim.SetBool("GreyGuySelect", false);
-                        anim.SetBool("GhostSelect", true);
-                        break;
-                }
-                firstThrough = false;
-            }
 
             //Debug.Log(IsGrounded());
             //Debug.Log(notJumping);
@@ -158,10 +155,47 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+
+
+
+
+    //Math
+
     bool Approximately(float a, float b, float e) {
         //Debug.Log(Mathf.Abs(a - b));
         return Mathf.Abs(a - b) < e;
     }
+
+
+
+
+
+
+    //Jump
+
+    void Jump()
+    {
+        //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
+        if (chargeTime > 0) {
+            Vector2 movement = new Vector2(direction * 4.0f, chargeTime * jumpForce);
+            rb.velocity = movement;
+        }
+        notJumping = false;
+        readyToJump = false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // Collision Detection
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -202,16 +236,6 @@ public class PlayerMovement : MonoBehaviour
 
     //void OnCollisionExit2D(Collision2D col){}
 
-    void Jump()
-    {
-        //Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-        if (chargeTime > 0) {
-            Vector2 movement = new Vector2(direction * 4.0f, chargeTime * jumpForce);
-            rb.velocity = movement;
-        }
-        notJumping = false;
-        readyToJump = false;
-    }
 
     public bool IsGrounded()
     {
@@ -232,6 +256,70 @@ public class PlayerMovement : MonoBehaviour
         return Approximately(rb.velocity.x, 0.0f, 0.01f);
     }
 
+
+
+
+
+
+
+
+
+
+    //Pause Menu
+
+    public void Resume(){
+        pauseMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(false);
+        Time.timeScale = GAME_SPEED;
+        paused = false;
+    }
+
+    public void Pause(){
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        paused = true;
+    }
+
+    public void Settings(){
+        pauseMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(true);
+    }
+
+    public void Menu(){
+        SceneManager.LoadScene("TitleScreenBasic");
+    }
+
+    //Settings
+    public void ChangeSkin(){
+        if(skinSelect == 1){
+            skinSelect = 0;
+        }else{
+            skinSelect = 1;
+        }
+        SkinSelect();
+    }
+
+    public void ToggleCheat(){
+        if(cheatsActive){
+            Debug.Log("Cheats Disabled");
+            bar.SetActive(false);
+            barBackground.SetActive(false);
+            cheatsActive = false;
+        }else{
+            Debug.Log("Cheats Enabled");
+            bar.SetActive(true);
+            barBackground.SetActive(true);
+            cheatsActive = true;
+        }
+    }
+
+
+
+
+
+
+    //Skins
+
     public void GreyGuySelected()
     {
         skinSelect = 0;
@@ -240,5 +328,19 @@ public class PlayerMovement : MonoBehaviour
     public void GhostSelected()
     {
         skinSelect = 1;
+    }
+
+    void SkinSelect(){
+        switch (skinSelect)
+        {
+            case 0:
+                anim.SetBool("GreyGuySelect", true);
+                anim.SetBool("GhostSelect", false);
+                break;
+            case 1:
+                anim.SetBool("GreyGuySelect", false);
+                anim.SetBool("GhostSelect", true);
+                break;
+        }
     }
 }
