@@ -41,12 +41,17 @@ public class PlayerMovement : MonoBehaviour
     {
         Time.timeScale = GAME_SPEED;
         SkinSelect(PlayerPrefs.GetInt("skin"));
+
+        if(PlayerPrefs.HasKey("x-position")){
+            Vector2 prevPosition = new Vector2(PlayerPrefs.GetFloat("x-position"), PlayerPrefs.GetFloat("y-position"));
+            transform.position = prevPosition;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(IsGrounded() && Input.GetKeyDown(KeyCode.Escape)){
             if(paused){
                 Resume();
             }else{
@@ -106,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+            //Save
+            if(IsGrounded()){
+                PlayerPrefs.SetFloat("x-position", transform.position.x);
+                PlayerPrefs.SetFloat("y-position", transform.position.y);
+            }
 
 
             //Animation
