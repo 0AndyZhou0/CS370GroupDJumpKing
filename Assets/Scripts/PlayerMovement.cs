@@ -46,6 +46,12 @@ public class PlayerMovement : MonoBehaviour
             Vector2 prevPosition = new Vector2(PlayerPrefs.GetFloat("x-position"), PlayerPrefs.GetFloat("y-position"));
             transform.position = prevPosition;
         }
+
+        if(PlayerPrefs.HasKey("cheats")){
+            if(PlayerPrefs.GetInt("cheats") == 1){
+                ToggleCheat();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -326,10 +332,12 @@ public class PlayerMovement : MonoBehaviour
             bar.SetActive(false);
             barBackground.SetActive(false);
             cheatsActive = false;
+            PlayerPrefs.SetInt("cheats", 0);
         }else{
             bar.SetActive(true);
             barBackground.SetActive(true);
             cheatsActive = true;
+            PlayerPrefs.SetInt("cheats", 1);
         }
     }
 
