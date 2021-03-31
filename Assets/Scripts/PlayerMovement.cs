@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         if(PlayerPrefs.HasKey("x-position")){
             Vector2 prevPosition = new Vector2(PlayerPrefs.GetFloat("x-position"), PlayerPrefs.GetFloat("y-position"));
             transform.position = prevPosition;
+            Vector2 prevVelocity = new Vector2(PlayerPrefs.GetFloat("x-velocity"), PlayerPrefs.GetFloat("y-velocity"));
+            rb.velocity = prevVelocity;
         }
 
         if(PlayerPrefs.HasKey("cheats")){
@@ -64,6 +66,12 @@ public class PlayerMovement : MonoBehaviour
                 Pause();
             }
         }
+
+        //Save
+        PlayerPrefs.SetFloat("x-position", transform.position.x);
+        PlayerPrefs.SetFloat("y-position", transform.position.y);
+        PlayerPrefs.SetFloat("x-velocity", rb.velocity.x);
+        PlayerPrefs.SetFloat("y-velocity", rb.velocity.y);
 
         if(Input.GetKeyDown(KeyCode.E))
         {
@@ -126,12 +134,6 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
-
-            //Save
-            if(IsGrounded()){
-                PlayerPrefs.SetFloat("x-position", transform.position.x);
-                PlayerPrefs.SetFloat("y-position", transform.position.y);
-            }
 
 
             //Animation
