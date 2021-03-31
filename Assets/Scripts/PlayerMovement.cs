@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+ using UnityEngine.Tilemaps;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -287,6 +289,18 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    //Secret room trigger
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        col.gameObject.GetComponent<TilemapRenderer>().enabled = false;
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        col.gameObject.GetComponent<TilemapRenderer>().enabled = true;
+    }
+
 
 
 
@@ -294,30 +308,35 @@ public class PlayerMovement : MonoBehaviour
 
     //Pause Menu
 
-    public void Resume(){
+    public void Resume()
+    {
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
         Time.timeScale = GAME_SPEED;
         paused = false;
     }
 
-    public void Pause(){
+    public void Pause()
+    {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         paused = true;
     }
 
-    public void Settings(){
+    public void Settings()
+    {
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(true);
     }
 
-    public void Menu(){
+    public void Menu()
+    {
         SceneManager.LoadScene("TitleScreenBasic");
     }
 
     //Settings
-    public void ChangeSkin(){
+    public void ChangeSkin()
+    {
         anim.Rebind();
         //anim.Update(0f);
         if(PlayerPrefs.GetInt("skin") == 1){
@@ -329,7 +348,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ToggleCheat(){
+    public void ToggleCheat()
+    {
         if(cheatsActive){
             bar.SetActive(false);
             barBackground.SetActive(false);
@@ -349,7 +369,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     //Skins
-    void SkinSelect(int skinSelect){
+    void SkinSelect(int skinSelect)
+    {
         switch (skinSelect)
         {
             case 0:
