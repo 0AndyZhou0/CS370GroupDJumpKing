@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsGrounded() && Input.GetKeyDown(KeyCode.Escape)){
+        if(IsGrounded() && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
             if(paused){
                 Resume();
             }else{
