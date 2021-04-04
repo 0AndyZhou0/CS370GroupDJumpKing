@@ -13,4 +13,9 @@ public class SkinSelect : MonoBehaviour
     {
         PlayerPrefs.SetInt("skin", 1);
     }
+
+    public void JumpKingSelected()
+    {
+        PlayerPrefs.SetInt("skin", 2);
+    }
 }

@@ -336,15 +336,16 @@ public class PlayerMovement : MonoBehaviour
 
     //Settings
     public void ChangeSkin()
-    {
+    { 
+        int current = PlayerPrefs.GetInt("skin");
         anim.Rebind();
         //anim.Update(0f);
-        if(PlayerPrefs.GetInt("skin") == 1){
+        if(current == 2){
             PlayerPrefs.SetInt("skin", 0);
             SkinSelect(0);
         }else{
-            PlayerPrefs.SetInt("skin", 1);
-            SkinSelect(1);
+            PlayerPrefs.SetInt("skin", current+1);
+            SkinSelect(current + 1);
         }
     }
 
@@ -376,10 +377,17 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 anim.SetBool("GreyGuySelect", true);
                 anim.SetBool("GhostSelect", false);
+                anim.SetBool("JumpKingSelect", false);
                 break;
             case 1:
                 anim.SetBool("GreyGuySelect", false);
                 anim.SetBool("GhostSelect", true);
+                anim.SetBool("JumpKingSelect", false);
+                break;
+            case 2:
+                anim.SetBool("GreyGuySelect", false);
+                anim.SetBool("GhostSelect", false);
+                anim.SetBool("JumpKingSelect", true);
                 break;
         }
     }
