@@ -399,6 +399,8 @@ public class PlayerMovement : MonoBehaviour
     public void SavePlayer()
     {
         SaveSystem.SavePlayer(this);
+
+        FlagController.FixedUpdate();
     }
 
     public void LoadPlayer()
