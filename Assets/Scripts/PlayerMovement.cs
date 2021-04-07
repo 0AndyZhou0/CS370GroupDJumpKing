@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
- using UnityEngine.Tilemaps;
+using UnityEngine.Tilemaps;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -47,15 +47,16 @@ public class PlayerMovement : MonoBehaviour
         if(PlayerPrefs.HasKey("x-position")){
             Vector2 prevPosition = new Vector2(PlayerPrefs.GetFloat("x-position"), PlayerPrefs.GetFloat("y-position"));
             transform.position = prevPosition;
+
             Vector2 prevVelocity = new Vector2(PlayerPrefs.GetFloat("x-velocity"), PlayerPrefs.GetFloat("y-velocity"));
             rb.velocity = prevVelocity;
         }
 
-        if(PlayerPrefs.HasKey("cheats")){
-            if(PlayerPrefs.GetInt("cheats") == 1){
+        orderStages();
+
+        if(PlayerPrefs.HasKey("cheats"))
+            if(PlayerPrefs.GetInt("cheats") == 1)
                 ToggleCheat();
-            }
-        }
     }
 
     // Update is called once per frame
@@ -412,7 +413,59 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+
+
+
+
+
+
+
+    // Order stages
+    void orderStages(){
+        if(PlayerPrefs.HasKey("orderStone")){
+            //Set stone levels
+            GameObject[] stoneLevels = new GameObject[2];
+            for(int i = 1; i <= 2; i++){
+                stoneLevels[i-1] = GameObject.Find("Stone" + i);
+            }
+            stoneLevels[PlayerPrefs.GetInt("orderStone")].transform.Translate(Vector3.up * 22);
+            stoneLevels[1 - PlayerPrefs.GetInt("orderStone")].transform.Translate(Vector3.up * 50);
+
+
+            GameObject[] dirtLevels = new GameObject[3];
+            for(int i = 2; i <= 4; i++){
+                dirtLevels[i-2] = GameObject.Find("Dirt" + i);
+            }
+
+            int orderDirt = PlayerPrefs.GetInt("orderDirt");
+            for(int i = 2; i >= 0; i--){
+                int mask = ((1 << 2) - 1) << (i*2);
+                Debug.Log((mask & orderDirt) >> (i*2));
+            }
+        }else{
+            PlayerPrefs.SetInt("orderStone", Random.Range(0,2));  //0 or 1
+
+
+            int[] order = new int[3];
+            for(int i = 1; i <= 2;){
+                int rand = Random.Range(1,4);
+                if(order[rand-1] == 0){
+                    order[rand-1] = i;
+                    i++;
+                }
+            }
+
+            int orderDirt = 0;
+            foreach(int i in order){
+                Debug.Log(i);
+                orderDirt += i;
+                orderDirt = orderDirt << 2;
+            }
+            orderDirt = orderDirt >> 2;
+
+            PlayerPrefs.SetInt("orderDirt", orderDirt);
+        }
+    }
+
 }
-
-
-
