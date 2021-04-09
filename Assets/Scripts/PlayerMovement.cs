@@ -443,7 +443,7 @@ public class PlayerMovement : MonoBehaviour
             int orderDirt = PlayerPrefs.GetInt("orderDirt");
             for(int i = 2; i >= 0; i--){
                 int mask = ((1 << 2) - 1) << (i*2);
-                Debug.Log((mask & orderDirt) >> (i*2));
+                //Debug.Log((mask & orderDirt) >> (i*2));
             }
         }else{
             PlayerPrefs.SetInt("orderStone", Random.Range(0,2));  //0 or 1
@@ -460,7 +460,7 @@ public class PlayerMovement : MonoBehaviour
 
             int orderDirt = 0;
             foreach(int i in order){
-                Debug.Log(i);
+                //Debug.Log(i);
                 orderDirt += i;
                 orderDirt = orderDirt << 2;
             }
