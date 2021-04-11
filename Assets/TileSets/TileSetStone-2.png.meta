@@ -13,10 +13,22 @@ TextureImporter:
     second: TileSetStone-2_2
   - first:
       213: 2796393450368563209
-    second: TileSetStone-2_3
+    second: TileSetStone-2_6
   - first:
       213: -5187393289837580109
     second: TileSetStone-2_4
+  - first:
+      213: -8114965988922210542
+    second: TileSetStone-2_6
+  - first:
+      213: -2702714826749189759
+    second: TileSetStone-2_3
+  - first:
+      213: 5388103124146102764
+    second: TileSetStone-2_4
+  - first:
+      213: -6215494805655127506
+    second: TileSetStone-2_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -122,7 +134,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -143,7 +155,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -164,7 +176,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,6 +184,69 @@ TextureImporter:
       bones: []
       spriteID: 7a5e17417156c0d10800000000000000
       internalID: 2093159076622099879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetStone-2_5
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9087275f609cec620800000000000000
+      internalID: 2796393450368563209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetStone-2_7
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b07cf0794da208b0800000000000000
+      internalID: -5187393289837580109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetStone-2_8
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2174ae19d69d16f80800000000000000
+      internalID: -8114965988922210542
       vertices: []
       indices: 
       edges: []
@@ -185,14 +260,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9087275f609cec620800000000000000
-      internalID: 2796393450368563209
+      spriteID: 181ee664f270e7ad0800000000000000
+      internalID: -2702714826749189759
       vertices: []
       indices: 
       edges: []
@@ -206,14 +281,35 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b07cf0794da208b0800000000000000
-      internalID: -5187393289837580109
+      spriteID: ce1a6e77e3366ca40800000000000000
+      internalID: 5388103124146102764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetStone-2_6
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2af3a5c7602eb9a0800000000000000
+      internalID: -6215494805655127506
       vertices: []
       indices: 
       edges: []
