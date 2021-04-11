@@ -20,4 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WholeGame.unity
     guid: 1dd86870124376249acfb648e52ec1a9
+  - enabled: 1
+    path: Assets/Scenes/AndysLevel.unity
+    guid: cfefc030b4a33e64b95f34caf46ca1a1
+  - enabled: 1
+    path: Assets/Scenes/Dirt2.unity
+    guid: bd2e189be35e1cf40ad234bfb82a5c0f
+  - enabled: 1
+    path: Assets/Scenes/Dirt3.unity
+    guid: 770831e8fbc56f5438df1e3fa74f8024
+  - enabled: 1
+    path: Assets/Scenes/Dirt4.unity
+    guid: 87fd305eddd9caf458c85192c6f93fef
   m_configObjects: {}
