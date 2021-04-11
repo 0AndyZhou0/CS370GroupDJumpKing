@@ -425,7 +425,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Order stages
     void orderStages(){
-        if(PlayerPrefs.HasKey("orderStone")){
+        if(!PlayerPrefs.HasKey("orderStone")){
             //Set stone levels
             GameObject[] stoneLevels = new GameObject[2];
             for(int i = 1; i <= 2; i++){
@@ -467,6 +467,8 @@ public class PlayerMovement : MonoBehaviour
             orderDirt = orderDirt >> 2;
 
             PlayerPrefs.SetInt("orderDirt", orderDirt);
+
+            orderStages();
         }
     }
 
