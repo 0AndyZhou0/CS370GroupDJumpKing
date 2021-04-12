@@ -428,21 +428,24 @@ public class PlayerMovement : MonoBehaviour
         if(PlayerPrefs.HasKey("orderStone"))
         {
             //Set stone levels
-            GameObject.Find("Stone" + ( 1+PlayerPrefs.GetInt("orderStone")) ).transform.Translate(Vector3.up * 22);
-            GameObject.Find("Stone" + ( 2-PlayerPrefs.GetInt("orderStone")) ).transform.Translate(Vector3.up * 50);
+            int orderStone = PlayerPrefs.GetInt("orderStone");
+            for (int i = 0; i < 2; i++)
+            {
+                //GameObject.Find("Stone" + ( (1+orderStone)*(1-i) + (2-orderStone)*i )).transform.Translate(Vector3.up * (22 + i*28));
+                GameObject.Find("Stone" + (1 + i + orderStone - 2* orderStone * i)).transform.Translate(Vector3.up * (22 + i * 28));
+            }
+            //GameObject.Find("Stone" + ( 1+orderStone) ).transform.Translate(Vector3.up * 22 + 0);
+            //GameObject.Find("Stone" + ( 2-orderStone) ).transform.Translate(Vector3.up * 22 + 28);
 
 
             //Set dirt levels
             int orderDirt = PlayerPrefs.GetInt("orderDirt");
-            int first = 1 + ((orderDirt >> 0) & 3);
-            //GameObject.Find("Dirt" + first).transform.Translate(Vector3.up * 97);
-            int second = 1 + ((orderDirt >> 2) & 3);
-            //GameObject.Find("Dirt" + second).transform.Translate(Vector3.up * 125);
-            int third = 1 + ((orderDirt >> 4) & 3);
-            //GameObject.Find("Dirt" + third).transform.Translate(Vector3.up * 153);
-            //Debug.Log(first);
-            //Debug.Log(second);
-            //Debug.Log(third);
+            for(int i = 0; i < 3; i++)
+            {
+                int orderNum = 1 + ((orderDirt >> i*2) & 3);
+                //GameObject.Find("Dirt" + first).transform.Translate(Vector3.up * 97 + (28*i));
+                Debug.Log(orderNum);
+            }
         }
         else
         {
