@@ -448,7 +448,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 int orderNum = 1 + ((orderDirt >> i*2) & 3);
                 //GameObject.Find("Dirt" + first).transform.Translate(Vector3.up * 97 + (28*i));
-                Debug.Log(orderNum);
+                //Debug.Log(orderNum);
             }
         }
         else
