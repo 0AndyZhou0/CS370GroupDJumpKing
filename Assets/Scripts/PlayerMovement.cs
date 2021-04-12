@@ -62,6 +62,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cheatsActive && Input.GetKeyDown(KeyCode.J))
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y + 20);
+        }
         if(IsGrounded() && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
             if(paused){
                 Resume();
