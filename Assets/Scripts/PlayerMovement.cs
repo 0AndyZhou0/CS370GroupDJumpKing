@@ -431,8 +431,8 @@ public class PlayerMovement : MonoBehaviour
             int orderStone = PlayerPrefs.GetInt("orderStone");
             for (int i = 0; i < 2; i++)
             {
-                //GameObject.Find("Stone" + ( (1+orderStone)*(1-i) + (2-orderStone)*i )).transform.Translate(Vector3.up * (22 + i*28));
-                GameObject.Find("Stone" + (1 + i + orderStone - 2* orderStone * i)).transform.Translate(Vector3.up * (22 + i * 28));
+                GameObject.Find("Stone" + ( (1+orderStone)*(1-i) + (2-orderStone)*i )).transform.Translate(Vector3.up * (22 + i*28));
+                //GameObject.Find("Stone" + (1 + i + orderStone - 2*orderStone*i)).transform.Translate(Vector3.up * (22 + i * 28)); //The same formula but expanded
             }
             //GameObject.Find("Stone" + ( 1+orderStone) ).transform.Translate(Vector3.up * 22 + 0);
             //GameObject.Find("Stone" + ( 2-orderStone) ).transform.Translate(Vector3.up * 22 + 28);
