@@ -425,41 +425,46 @@ public class PlayerMovement : MonoBehaviour
 
     // Order stages
     void orderStages(){
-        if(PlayerPrefs.HasKey("orderStone")){
+        if(PlayerPrefs.HasKey("orderStone"))
+        {
             //Set stone levels
-            GameObject[] stoneLevels = new GameObject[2];
-            for(int i = 1; i <= 2; i++){
-                stoneLevels[i-1] = GameObject.Find("Stone" + i);
-            }
-            stoneLevels[PlayerPrefs.GetInt("orderStone")].transform.Translate(Vector3.up * 22);
-            stoneLevels[1 - PlayerPrefs.GetInt("orderStone")].transform.Translate(Vector3.up * 50);
+            GameObject.Find("Stone" + ( 1+PlayerPrefs.GetInt("orderStone")) ).transform.Translate(Vector3.up * 22);
+            GameObject.Find("Stone" + ( 2-PlayerPrefs.GetInt("orderStone")) ).transform.Translate(Vector3.up * 50);
 
 
-            GameObject[] dirtLevels = new GameObject[3];
-            for(int i = 2; i <= 4; i++){
-                dirtLevels[i-2] = GameObject.Find("Dirt" + i);
-            }
-
+            //Set dirt levels
             int orderDirt = PlayerPrefs.GetInt("orderDirt");
-            for(int i = 2; i >= 0; i--){
-                int mask = ((1 << 2) - 1) << (i*2);
-                //Debug.Log((mask & orderDirt) >> (i*2));
-            }
-        }else{
+            int first = 1 + ((orderDirt >> 0) & 3);
+            //GameObject.Find("Dirt" + first).transform.Translate(Vector3.up * 97);
+            int second = 1 + ((orderDirt >> 2) & 3);
+            //GameObject.Find("Dirt" + second).transform.Translate(Vector3.up * 125);
+            int third = 1 + ((orderDirt >> 4) & 3);
+            //GameObject.Find("Dirt" + third).transform.Translate(Vector3.up * 153);
+            //Debug.Log(first);
+            //Debug.Log(second);
+            //Debug.Log(third);
+        }
+        else
+        {
             PlayerPrefs.SetInt("orderStone", Random.Range(0,2));  //0 or 1
 
 
+            //Make random order in an array
             int[] order = new int[3];
-            for(int i = 1; i <= 2;){
+            for(int i = 1; i <= 2;)
+            {
                 int rand = Random.Range(1,4);
-                if(order[rand-1] == 0){
+                if(order[rand-1] == 0)
+                {
                     order[rand-1] = i;
                     i++;
                 }
             }
 
+            //Rewrite array as an int
             int orderDirt = 0;
-            foreach(int i in order){
+            foreach(int i in order)
+            {
                 //Debug.Log(i);
                 orderDirt += i;
                 orderDirt = orderDirt << 2;
