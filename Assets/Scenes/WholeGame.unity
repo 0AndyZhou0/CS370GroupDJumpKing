@@ -3675,7 +3675,7 @@ GameObject:
   - component: {fileID: 362124986}
   - component: {fileID: 362124991}
   m_Layer: 8
-  m_Name: CollapsingTileset
+  m_Name: Collapsing Tileset
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
