@@ -221,14 +221,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
     // Collision Detection
 
     void OnCollisionEnter2D(Collision2D col)
@@ -268,8 +260,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //void OnCollisionExit2D(Collision2D col){}
-
 
     public bool IsGrounded()
     {
@@ -295,7 +285,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     //Secret room trigger
-
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         col.gameObject.GetComponent<TilemapRenderer>().enabled = false;
@@ -305,10 +295,6 @@ public class PlayerMovement : MonoBehaviour
     {
         col.gameObject.GetComponent<TilemapRenderer>().enabled = true;
     }
-
-
-
-
 
 
     //Pause Menu
@@ -370,10 +356,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-
-
-
     //Skins
     void SkinSelect(int skinSelect)
     {
@@ -418,13 +400,6 @@ public class PlayerMovement : MonoBehaviour
         transform.position = position;
 
     }
-
-
-
-
-
-
-
 
 
     // Order stages
