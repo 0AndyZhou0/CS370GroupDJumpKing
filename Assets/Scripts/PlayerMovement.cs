@@ -80,12 +80,12 @@ public class PlayerMovement : MonoBehaviour
         PlayerPrefs.SetFloat("x-velocity", rb.velocity.x);
         PlayerPrefs.SetFloat("y-velocity", rb.velocity.y);
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) & (ButtonScript.practiceMode == true))
         {
             SavePlayer();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) & (ButtonScript.practiceMode == true))
         {
             LoadPlayer();
         }

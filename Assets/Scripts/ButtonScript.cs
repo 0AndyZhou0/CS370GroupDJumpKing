@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
+    public static bool practiceMode = false;
+    public static bool cheatMode = false;
 
     public void lvlSelect()
     {
@@ -24,6 +26,16 @@ public class ButtonScript : MonoBehaviour
     public void backToMenu()
     {
         SceneManager.LoadScene("TitleScreenBasic");
+    }
+
+    public void PracticeModeOn()
+    {
+        practiceMode = !practiceMode;
+    }
+
+    public void CheatsOn()
+    {
+        cheatMode = !cheatMode;
     }
 
 }
