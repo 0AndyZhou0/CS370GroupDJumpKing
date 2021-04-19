@@ -7,7 +7,7 @@ public class FinishLine : MonoBehaviour
 {
 
 	public Font titlesFont;
-	public Font leadersFont;
+	//public Font leadersFont;
 	string playerName = "";
 	float time = 0.0f;
 	bool finished;
@@ -50,11 +50,13 @@ public class FinishLine : MonoBehaviour
 		if (finished)
 		{
 			GUI.skin.font = titlesFont;
-			var width200 = new GUILayoutOption[] { GUILayout.Width(200) };
-			var width = 620;  // Make this wider to add more columns
-			var height = 450;
+			
+			var width200 = new GUILayoutOption[] { GUILayout.Width(350) };
+			var width = 500;  // Make this smaller to add more columns
+			var height = 200;
 
-			var r = new Rect((Screen.width / 2) - (width / 2), (Screen.height / 2) - (height), width, height);
+			var r = new Rect(0, 0, Screen.width - width, Screen.height - height);
+			r.center = new Vector2(Screen.width / 2, Screen.height / 2);
 			GUILayout.BeginArea(r, new GUIStyle("box"));
 			GUILayout.BeginVertical();
 
@@ -109,7 +111,7 @@ public class FinishLine : MonoBehaviour
 					{
 						count++;
 						GUILayout.BeginHorizontal();
-						GUI.skin.font = leadersFont;
+						//GUI.skin.font = leadersFont;
 						GUILayout.Label(count + " " + currentScore.playerName, width200);
 						GUILayout.Label((currentScore.seconds/60).ToString() + " Min : " + (currentScore.seconds % 60).ToString() + " Sec", width200);
 						GUILayout.Label(currentScore.dateString, width200);
@@ -125,7 +127,7 @@ public class FinishLine : MonoBehaviour
 					PlayerPrefs.SetFloat("x-position", 0);
 					PlayerPrefs.SetFloat("y-position", -3);
 					PlayerPrefs.SetFloat("timer", 0);
-					PlayerPrefs.DeleteAll();
+					//PlayerPrefs.DeleteAll();
 					PlayerPrefs.Save();
 					SceneManager.LoadScene("TitleScreenBasic");
 				}
