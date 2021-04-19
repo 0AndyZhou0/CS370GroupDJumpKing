@@ -14,6 +14,7 @@ public class CollapsingTile : MonoBehaviour
     Tilemap collapsingTileset;
 
     bool onPlatform = false;
+    bool tbExists = false;
 
     void Start()
     {
@@ -23,14 +24,23 @@ public class CollapsingTile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(onPlatform);
         if(onPlatform == true){
             Vector3Int tilePosition = collapsingTileset.WorldToCell(player.transform.position + Vector3.down);
             //Debug.Log(tilePosition);
-            collapseTimes.Enqueue(Time.time + 3f);
-            collapseTimes.Enqueue(tilePosition);
-            //collapsingTileset.SetTile(tilePosition, null);
-            tb = collapsingTileset.GetTile(collapsingTileset.WorldToCell(tilePosition));
-            //Debug.Log(collapsingTileset.GetTile(collapsingTileset.WorldToCell(tilePosition)));
+            if(collapsingTileset.HasTile(tilePosition))
+            {
+                collapseTimes.Enqueue(Time.time + 3f);
+                collapseTimes.Enqueue(tilePosition);
+                //collapsingTileset.SetTile(tilePosition, null);
+                if(!tbExists)
+                {
+                    tb = collapsingTileset.GetTile(tilePosition);
+                    tbExists = true;
+                }
+                //Debug.Log(collapsingTileset.GetTile(collapsingTileset.WorldToCell(tilePosition)));
+            }
+            
         }
         if(collapseTimes.Count != 0 && (float)collapseTimes.Peek() <= Time.time)
         {
@@ -46,6 +56,7 @@ public class CollapsingTile : MonoBehaviour
         {
             respawnTimes.Dequeue();
             Vector3Int tilePosition = (Vector3Int)respawnTimes.Dequeue();
+            //Debug.Log(tilePosition);
             collapsingTileset.SetTile(tilePosition, tb);
         }
     }
