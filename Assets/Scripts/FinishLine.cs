@@ -79,7 +79,7 @@ public class FinishLine : MonoBehaviour
 				if (GUILayout.Button("Save Score"))
 				{
 					// add the score...
-					dl.AddScore(this.playerName, (int)time, (int)time);
+					dl.AddScore(this.playerName, (int)time * -1, (int)time);
 					this.gs = gameState.leaderboard;
 				}
 				GUILayout.EndHorizontal();
