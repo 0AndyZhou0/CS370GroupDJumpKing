@@ -39,10 +39,17 @@ public class PlayerMovement : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
 
+    public AudioSource audioSource;
+    public AudioClip jumpSound;
+    public AudioClip bumpSound;
+    public AudioClip landSound;
+
     void Start()
     {
         Time.timeScale = GAME_SPEED;
         SkinSelect(PlayerPrefs.GetInt("skin"));
+
+        audioSource = GetComponent<AudioSource>();
 
         if(PlayerPrefs.HasKey("x-position")){
             Vector2 prevPosition = new Vector2(PlayerPrefs.GetFloat("x-position"), PlayerPrefs.GetFloat("y-position"));
@@ -215,6 +222,9 @@ public class PlayerMovement : MonoBehaviour
             Vector2 movement = new Vector2(direction * 4.0f, chargeTime * jumpForce);
             rb.velocity = movement;
         }
+
+        audioSource.PlayOneShot(jumpSound, 1.0f);
+
         notJumping = false;
         readyToJump = false;
     }
@@ -232,6 +242,10 @@ public class PlayerMovement : MonoBehaviour
 
             //flat ground
             if (Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)) {
+                
+                if(col.relativeVelocity.magnitude > 12.0f)
+                    audioSource.PlayOneShot(landSound, 1.0f);
+                
                 notJumping = true;
             }
             //walls
@@ -241,7 +255,12 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y *= -1;
 
                 rb.velocity = velocity;
+
+                audioSource.PlayOneShot(bumpSound, 1.0f);
             }
+
+            else
+                audioSource.PlayOneShot(bumpSound, 1.0f);
             /*
             //flat roof
             else if (Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, -1.0f, 0.01f)) { }
