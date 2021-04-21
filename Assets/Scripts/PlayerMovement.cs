@@ -307,12 +307,14 @@ public class PlayerMovement : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D col)
     {
-        col.gameObject.GetComponent<TilemapRenderer>().enabled = false;
+        if(col.gameObject.name == "Secret")
+            col.gameObject.GetComponent<TilemapRenderer>().enabled = false;
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        col.gameObject.GetComponent<TilemapRenderer>().enabled = true;
+        if(col.gameObject.name == "Secret")
+            col.gameObject.GetComponent<TilemapRenderer>().enabled = true;
     }
 
 
