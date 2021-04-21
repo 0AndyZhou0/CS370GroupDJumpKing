@@ -22655,6 +22655,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
         type: 3}
+      propertyPath: bounceSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a7af8f6e3103e140860d279c0dffa99, type: 3}
+    - target: {fileID: 7272710399062892021, guid: 91ac859213f7a3747801e3759f1bef1d,
+        type: 3}
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 1071241270}
@@ -25576,7 +25581,7 @@ GameObject:
   - component: {fileID: 1672802697}
   m_Layer: 8
   m_Name: Bouncy
-  m_TagString: Ground
+  m_TagString: Bouncy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

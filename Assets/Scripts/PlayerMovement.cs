@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip bumpSound;
     public AudioClip landSound;
+    public AudioClip bounceSound;
 
     void Start()
     {
@@ -243,7 +244,9 @@ public class PlayerMovement : MonoBehaviour
             //flat ground
             if (Approximately(normal.x, 0.0f, 0.01f) && Approximately(normal.y, 1.0f, 0.01f)) {
                 
-                if(col.relativeVelocity.magnitude > 12.0f)
+                if(col.gameObject.tag == "Bouncy")
+                    audioSource.PlayOneShot(bounceSound, 1.0f);
+                else if(col.relativeVelocity.magnitude > 12.0f)
                     audioSource.PlayOneShot(landSound, 1.0f);
                 
                 notJumping = true;
