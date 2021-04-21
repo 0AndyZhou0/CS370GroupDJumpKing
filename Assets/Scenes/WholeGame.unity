@@ -10807,7 +10807,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1446248056}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &614380146
+--- !u!82 &614380149
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20711,6 +20711,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titlesFont: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
+  player: {fileID: 614380145}
+  timer: {fileID: 1103733907}
 --- !u!61 &1242238428
 BoxCollider2D:
   m_ObjectHideFlags: 0

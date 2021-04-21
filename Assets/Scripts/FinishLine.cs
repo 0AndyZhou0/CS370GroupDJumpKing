@@ -12,6 +12,9 @@ public class FinishLine : MonoBehaviour
 	float time = 0.0f;
 	bool finished;
 
+	public GameObject player;
+	public GameObject timer;
+
 	enum gameState
 	{
 		waiting,
@@ -124,10 +127,9 @@ public class FinishLine : MonoBehaviour
 
 				if (GUILayout.Button("Done"))
 				{
-					PlayerPrefs.SetFloat("x-position", 0);
-					PlayerPrefs.SetFloat("y-position", -3);
-					PlayerPrefs.SetFloat("timer", 0);
-					//PlayerPrefs.DeleteAll();
+					player.SetActive(false);
+					timer.SetActive(false);
+					PlayerPrefs.DeleteAll();
 					PlayerPrefs.Save();
 					SceneManager.LoadScene("TitleScreenBasic");
 				}
