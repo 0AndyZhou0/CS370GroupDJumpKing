@@ -115,7 +115,7 @@ public class FinishLine : MonoBehaviour
 						count++;
 						GUILayout.BeginHorizontal();
 						//GUI.skin.font = leadersFont;
-						GUILayout.Label(count + " " + currentScore.playerName, width200);
+						GUILayout.Label(count + " " + currentScore.playerName.Replace("+", " "), width200);
 						GUILayout.Label((currentScore.seconds/60).ToString() + " Min : " + (currentScore.seconds % 60).ToString() + " Sec", width200);
 						GUILayout.Label(currentScore.dateString, width200);
 						GUILayout.EndHorizontal();
