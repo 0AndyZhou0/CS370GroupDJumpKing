@@ -79,18 +79,15 @@ public class FinishLine : MonoBehaviour
 				if (GUILayout.Button("Save Score"))
 				{
 					// add the score...
-					if(!PlayerPrefs.HasKey("cheater")) 
-					{
-						dl.AddScore(this.playerName, (int)time * -1, (int)time);
-					}
+					if(PlayerPrefs.HasKey("cheater")) 
+						dl.AddScore(this.playerName, (int)1, (int)time);
+					else
+						dl.AddScore(this.playerName, (int)0, (int)time);
 					this.gs = gameState.leaderboard;
 				}
 				GUILayout.EndHorizontal();
 				GUILayout.Space(50);
-				if(!PlayerPrefs.HasKey("cheater")) 
-					GUILayout.Label("If your name has been previously entered only the shortest time will be saved.");
-				else
-					GUILayout.Label("Your Score will not be saved since you cheated.");
+				GUILayout.Label("If your name has been previously entered only the shortest time will be saved.");
 			}
 
 			if (this.gs == gameState.leaderboard)
@@ -105,6 +102,7 @@ public class FinishLine : MonoBehaviour
 				GUILayout.Label("Name", width200);
 				GUILayout.Label("Time", width200);
 				GUILayout.Label("Date", width200);
+				GUILayout.Label("Cheated", width200);
 				GUILayout.EndHorizontal();
 				List<dreamloLeaderBoard.Score> scoreList = dl.ToListLowToHigh();
 
@@ -124,6 +122,10 @@ public class FinishLine : MonoBehaviour
 						GUILayout.Label(count + " " + currentScore.playerName.Replace("+", " "), width200);
 						GUILayout.Label((currentScore.seconds/60).ToString() + " Min : " + (currentScore.seconds % 60).ToString() + " Sec", width200);
 						GUILayout.Label(currentScore.dateString, width200);
+						if(currentScore.score == 1)
+							GUILayout.Label("yes", width200);
+						else
+							GUILayout.Label("no", width200);
 						GUILayout.EndHorizontal();
 
 						if (count >= maxToDisplay) break;
