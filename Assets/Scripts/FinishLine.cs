@@ -79,12 +79,18 @@ public class FinishLine : MonoBehaviour
 				if (GUILayout.Button("Save Score"))
 				{
 					// add the score...
-					dl.AddScore(this.playerName, (int)time * -1, (int)time);
+					if(!PlayerPrefs.HasKey("cheater")) 
+					{
+						dl.AddScore(this.playerName, (int)time * -1, (int)time);
+					}
 					this.gs = gameState.leaderboard;
 				}
 				GUILayout.EndHorizontal();
 				GUILayout.Space(50);
-				GUILayout.Label("If your name has been previously entered only the shortest time will be saved.");
+				if(!PlayerPrefs.HasKey("cheater")) 
+					GUILayout.Label("If your name has been previously entered only the shortest time will be saved.");
+				else
+					GUILayout.Label("Your Score will not be saved since you cheated.");
 			}
 
 			if (this.gs == gameState.leaderboard)

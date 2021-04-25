@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if(PlayerPrefs.HasKey("cheats"))
             if(PlayerPrefs.GetInt("cheats") == 1)
                 ToggleCheat();
+
     }
 
     // Update is called once per frame
@@ -376,6 +377,8 @@ public class PlayerMovement : MonoBehaviour
             barBackground.SetActive(true);
             cheatsActive = true;
             PlayerPrefs.SetInt("cheats", 1);
+            
+            PlayerPrefs.SetInt("cheater", 1);
         }
     }
 
