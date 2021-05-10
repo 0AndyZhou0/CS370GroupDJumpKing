@@ -18,36 +18,31 @@ Cycle 1 -
     * [x] Prevent the player from moving left and right when charging a jump. (BUG: Works unless the user presses both buttons simultaneously)  
     * [x] Start working on assets.  
     * [x] Environment tileset   
-    * [ ] UI  
-    * [ ] Character  
+    * [X] UI  
+    * [X] Character  
     * [ ] Finish working on 2 mechanics used in later levels.  
     * [ ] Gravity changes  
     * [x] Sloped platforms  
     * [ ] Sticky platforms  
-    * [ ] Bouncy platforms  
+    * [X] Bouncy platforms  
     * [ ] Moving platforms  
     * [ ] Randomized platforms  
-    * [ ] Start designing early game levels  
+    * [X] Start designing early game levels  
 
   - [ ] Phase 2:   
-    * [ ] Continue designing the early game levels  
+    * [X] Continue designing the early game levels  
     * [ ] Finish working on 2 more of the mechanics used in later levels.  
     * [ ] Gravity changes  
-    * [ ] Sloped platforms  
     * [ ] Sticky platforms  
-    * [ ] Bouncy platforms  
     * [ ] Moving platforms  
-    * [ ] Randomized platforms  
+    * [X] Randomized platforms  
 
   - [ ] Phase 3:   
-    * [ ] Finish working on the early game levels  
+    * [X] Finish working on the early game levels  
     * [ ] Finish working on the last 2 of the mechanics used in later levels.  
     * [ ] Gravity changes  
-    * [ ] Sloped platforms  
     * [ ] Sticky platforms  
-    * [ ] Bouncy platforms  
     * [ ] Moving platforms  
-    * [ ] Randomized platforms  
 
 
 
